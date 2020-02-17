@@ -13,6 +13,11 @@
     "@types/when": "^2.4.33",
     "mendixmodelsdk": "^4.29.0",
     "mendixplatformsdk": "^4.1.1",
+    "minimist": "^1.2.0",
     "when": "^3.7.8"
+  },
+  "devDependencies": {
+    "@types/minimist": "^1.2.0",
+    "@types/node": "^13.7.1"
   }
 }
