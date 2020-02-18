@@ -1,7 +1,7 @@
 import {MendixSdkClient} from "mendixplatformsdk";
-import {ClientArguments} from "../index";
+import {GlobalArguments} from "../cli";
 
-export const mendixSdkClientMiddleware = (args: ClientArguments): ClientArguments => {
+export const mendixSdkClientMiddleware = (args: GlobalArguments): GlobalArguments => {
     args.client = new MendixSdkClient(args.username, args.apikey);
     return args;
 };

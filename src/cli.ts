@@ -1,6 +1,6 @@
-import {MendixSdkClient} from 'mendixplatformsdk';
 import {commandGenerateBuilder, commandGenerateHandler} from "./commands/generate";
 import {mendixSdkClientMiddleware} from "./middleware/mendix";
+import {MendixSdkClient} from "mendixplatformsdk";
 import yargs = require('yargs');
 
 export interface ProjectArguments {
@@ -8,13 +8,14 @@ export interface ProjectArguments {
     projectId?: string;
 }
 
-export interface ClientArguments {
+export interface ClientCredentialsArguments {
     username: string;
     apikey: string;
-    client?: MendixSdkClient;
 }
 
-export interface GlobalArguments extends ClientArguments, ProjectArguments {}
+export interface GlobalArguments extends ClientCredentialsArguments, ProjectArguments {
+    client?: MendixSdkClient;
+}
 
 yargs
     .options({
@@ -26,4 +27,3 @@ yargs
     .command('generate', 'generate documentation', commandGenerateBuilder, commandGenerateHandler)
     .middleware(mendixSdkClientMiddleware)
     .argv;
-

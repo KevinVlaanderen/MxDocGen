@@ -2,12 +2,15 @@
   "name": "mendixmoduledocs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "bin": "dist/cli.js",
+  "types": "dist/index.d.ts",
+  "prepublish": "tsc",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kevin Vlaanderen",
   "license": "ISC",
   "dependencies": {
     "@types/when": "^2.4.33",

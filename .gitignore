@@ -106,7 +106,10 @@ dist
 .tern-port
 
 # Generated
-/build
+/dist
+.idea
+.DS_Store
 
 # Application-specific
 config.json
+templates
