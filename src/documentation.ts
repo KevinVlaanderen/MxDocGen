@@ -1,25 +1,14 @@
-import {IModel} from "mendixmodelsdk";
 import {getFilteredDocuments, getFilteredModules, logProjectStructure, ProjectStructure} from "./projectStructure";
 import {MendixSdkClient} from "mendixplatformsdk";
+import {createWorkingCopy, WorkingCopyConfig} from "./sdk";
 
-export interface GenerateDocumentationConfig {
-    mpk?: string;
-    projectId?: string;
+interface GenerateDocumentationConfig extends WorkingCopyConfig {
     modulesRegex: string;
     ignorePatterns: string[];
 }
 
 export const generateDocumentation = async (client: MendixSdkClient, config: GenerateDocumentationConfig): Promise<void> => {
-    let model: IModel | undefined;
-
-    if (config.mpk) {
-        model = await client.model().createAndOpenWorkingCopy({
-            name: config.mpk,
-            template: config.mpk
-        });
-    } else {
-        throw new Error("No project configured");
-    }
+    const model = await createWorkingCopy(client, config);
 
     const projectStructure = getFilteredModules(model, new RegExp(config.modulesRegex))
         .map(module => ({

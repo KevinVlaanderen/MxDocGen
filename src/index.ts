@@ -1,1 +1,2 @@
-export { generateDocumentation } from "./documentation";
+export {createMendixSdkClient} from "./sdk";
+export {generateDocumentation} from "./documentation";

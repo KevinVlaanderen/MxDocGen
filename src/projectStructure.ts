@@ -7,7 +7,7 @@ export interface ProjectStructure {
     [module: string]: DocumentDescription[]
 }
 
-interface DocumentDescription {
+export interface DocumentDescription {
     folder: string;
     name: string;
     document: IDocument;

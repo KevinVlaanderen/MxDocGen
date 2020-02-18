@@ -9,7 +9,7 @@ interface GenerateCommandArguments extends GlobalArguments {
     types: DocumentType[]
 }
 
-export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>): GlobalArguments =>
+export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) =>
     yargs.options({
         "modules": {type: "string", default: ".*"},
         "documents": {type: "array", default: "**"},
@@ -18,12 +18,12 @@ export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>): GlobalArgu
 
 export const commandGenerateHandler = async (argv: GenerateCommandArguments) => await commandGenerateDocumentation(argv);
 
-const commandGenerateDocumentation = async (args: GenerateCommandArguments): Promise<void> => {
+const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
     console.log('Generating documentation...');
 
     return generateDocumentation(args.client!, {
         mpk: args.mpk,
-        projectId: args.projectId,
+        projectId: args.projectid,
         modulesRegex: args.modulesRegex,
         ignorePatterns: args.ignorePatterns
     });

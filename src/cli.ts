@@ -5,7 +5,9 @@ import yargs = require('yargs');
 
 export interface ProjectArguments {
     mpk?: string;
-    projectId?: string;
+    projectid?: string;
+    revision?: number;
+    branch?: string;
 }
 
 export interface ClientCredentialsArguments {
@@ -22,8 +24,12 @@ yargs
         username: { type: "string", demandOption: true, requiresArg: true },
         apikey: { type: "string", demandOption: true, requiresArg: true },
         mpk: { type: "string", conflicts: "projectId", requiresArg: true },
-        projectId: { type: "string", conflicts: "mpk", requiresArg: true }
+        projectid: { type: "string", conflicts: "mpk", requiresArg: true, implies: ["revision", "branch"] },
+        revision: { type: "number", requiresArg: true },
+        branch: { type: "string", requiresArg: true }
     })
-    .command('generate', 'generate documentation', commandGenerateBuilder, commandGenerateHandler)
+    .group(["username", "apikey"], "Credentials:")
+    .group(["mpk", "projectid", "revision", "branch"], "Project:")
     .middleware(mendixSdkClientMiddleware)
+    .command('generate', 'generate documentation', commandGenerateBuilder, commandGenerateHandler)
     .argv;
