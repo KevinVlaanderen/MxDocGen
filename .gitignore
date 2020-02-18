@@ -105,8 +105,8 @@ dist
 # TernJS port file
 .tern-port
 
-# Sourcemaps
-*.js.map
+# Generated
+/build
 
 # Application-specific
 config.json

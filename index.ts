@@ -1,36 +1,29 @@
-import { MendixSdkClient, OnlineWorkingCopy } from 'mendixplatformsdk';
-import { domainmodels } from 'mendixmodelsdk';
+import {MendixSdkClient} from 'mendixplatformsdk';
+import {commandGenerateBuilder, commandGenerateHandler} from "./commands/generate";
+import {mendixSdkClientMiddleware} from "./middleware/mendix";
+import yargs = require('yargs');
 
-import minimist from "minimist";
-import {Config} from "./config";
-
-const config: Config = require("./config.json");
-
-const args = minimist(process.argv.slice(2), {
-    string: "path"
-});
-
-const username = config.sdk.username;
-const apikey = config.sdk.apikey;
-const client = new MendixSdkClient(username, apikey);
-
-async function generateDocumentation(path: string) {
-    console.log(path);
-
-    const project = await client.model().createAndOpenWorkingCopy({
-        name: path,
-        template: path
-    });
-
-    let moduleRegex: RegExp;
-    if (config.project?.modulePattern)
-        moduleRegex = new RegExp(config.project.modulePattern);
-
-    const modules = project.allModules().filter(module => moduleRegex ? module.name.match(moduleRegex) : true);
-
-
-
-    await project.deleteWorkingCopy();
+export interface ProjectArguments {
+    mpk?: string;
+    projectId?: string;
 }
 
-generateDocumentation(args.path);
+export interface ClientArguments {
+    username: string;
+    apikey: string;
+    client?: MendixSdkClient;
+}
+
+export interface GlobalArguments extends ClientArguments, ProjectArguments {}
+
+yargs
+    .options({
+        username: { type: "string", demandOption: true, requiresArg: true },
+        apikey: { type: "string", demandOption: true, requiresArg: true },
+        mpk: { type: "string", conflicts: "projectId", requiresArg: true },
+        projectId: { type: "string", conflicts: "mpk", requiresArg: true }
+    })
+    .command('generate', 'generate documentation', commandGenerateBuilder, commandGenerateHandler)
+    .middleware(mendixSdkClientMiddleware)
+    .argv;
+
