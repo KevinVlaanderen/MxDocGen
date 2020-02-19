@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
-  "bin": "dist/cli.js",
+  "bin": "dist/cli/cli.js",
   "types": "dist/index.d.ts",
   "prepublish": "tsc",
   "scripts": {
@@ -21,7 +21,11 @@
     "yargs": "^15.1.0"
   },
   "devDependencies": {
+    "@types/jest": "^25.1.2",
     "@types/node": "^13.7.1",
-    "@types/yargs": "^15.0.3"
+    "@types/yargs": "^15.0.3",
+    "jest": "^25.1.0",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.7.5"
   }
 }

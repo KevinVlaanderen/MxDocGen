@@ -8,8 +8,6 @@ export interface WorkingCopyConfig {
     revision?: number;
 }
 
-export const createMendixSdkClient = (username: string, apiKey: string) => new MendixSdkClient(username, apiKey);
-
 export const createWorkingCopy = async (client: MendixSdkClient, config: WorkingCopyConfig): Promise<IModel> => {
     if ("mpk" in config) {
         return await client.model().createAndOpenWorkingCopy({

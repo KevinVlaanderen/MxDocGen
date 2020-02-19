@@ -1,7 +1,7 @@
 import {Argv} from "yargs";
-import {DocumentType, documentTypes} from "../documentTypes";
-import {generateDocumentation} from "../documentation";
 import {GlobalArguments} from "../cli";
+import {DocumentType, documentTypes} from "../../sdk/projectStructure";
+import {generateDocumentation} from "../../documentation/documentation";
 
 interface GenerateCommandArguments extends GlobalArguments {
     modules: string;
@@ -21,10 +21,13 @@ export const commandGenerateHandler = async (argv: GenerateCommandArguments) => 
 const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
     console.log('Generating documentation...');
 
+    const typesConfig = args.types.reduce((previousValue, currentValue) => previousValue[currentValue] = true, {} as any);
+
     return generateDocumentation(args.client!, {
         mpk: args.mpk,
         projectId: args.projectid,
         modulesRegex: args.modules,
-        ignorePatterns: args.ignore
+        ignorePatterns: args.ignore,
+        types: typesConfig
     });
 };
