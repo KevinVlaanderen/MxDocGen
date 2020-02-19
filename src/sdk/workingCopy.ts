@@ -6,22 +6,32 @@ export interface WorkingCopyConfig {
     projectId?: string;
     branch?: string;
     revision?: number;
+    workingCopyId?: string;
 }
 
 export const createWorkingCopy = async (client: MendixSdkClient, config: WorkingCopyConfig): Promise<IModel> => {
-    if ("mpk" in config) {
-        return await client.model().createAndOpenWorkingCopy({
+    if (config.mpk !== undefined) {
+        const workingCopy = await client.model().createWorkingCopy({
             name: config.mpk!,
             template: config.mpk!
         });
-    } else if ("projectId" in config) {
+
+        console.log(`Created working copy with id ${workingCopy.id}`);
+
+        return client.model().openWorkingCopy(workingCopy.id);
+    } else if (config.projectId !== undefined) {
         const workingCopy = await client.model().createWorkingCopyFromTeamServer({
             name: config.mpk!,
             projectId: config.projectId!,
             teamServerBaseBranch: config.branch!,
             teamServerBaseRevision: config.revision!
         });
+
+        console.log(`Created working copy with id ${workingCopy.id}`);
+
         return client.model().openWorkingCopy(workingCopy.id);
+    } else if (config.workingCopyId !== undefined) {
+        return await client.model().openWorkingCopy(config.workingCopyId!);
     } else {
         throw new Error("No project configured");
     }

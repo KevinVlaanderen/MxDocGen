@@ -33,6 +33,4 @@ export const generateDocumentation = async (client: MendixSdkClient, config: Gen
     //         console.log(structure.structureTypeName);
     //     })
     // }
-
-    await model.deleteWorkingCopy();
 };

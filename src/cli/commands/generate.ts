@@ -21,11 +21,17 @@ export const commandGenerateHandler = async (argv: GenerateCommandArguments) => 
 const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
     console.log('Generating documentation...');
 
-    const typesConfig = args.types.reduce((previousValue, currentValue) => previousValue[currentValue] = true, {} as any);
+    const typesConfig = args.types.reduce((previousValue, currentValue) => {
+        previousValue[currentValue] = true;
+        return previousValue;
+    }, {} as any);
 
-    return generateDocumentation(args.client!, {
+    await generateDocumentation(args.client!, {
         mpk: args.mpk,
         projectId: args.projectid,
+        branch: args.branch,
+        revision: args.revision,
+        workingCopyId: args.workingcopyid,
         modulesRegex: args.modules,
         ignorePatterns: args.ignore,
         types: typesConfig
