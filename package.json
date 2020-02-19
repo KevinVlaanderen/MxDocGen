@@ -7,6 +7,7 @@
   "types": "dist/index.d.ts",
   "prepublish": "tsc",
   "scripts": {
+    "start": "node ./dist/cli/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
