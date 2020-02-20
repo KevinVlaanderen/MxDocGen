@@ -46,15 +46,15 @@ yargs
     .middleware(mendixSdkClientMiddleware)
     .command('generate', 'Generate documentation', commandGenerateBuilder, commandGenerateHandler)
     .demandCommand(1, 'You need at least one command before moving on')
-    // .fail(function (msg: string, err: Error, yargs: Argv<GlobalArguments>) {
-    //     if (err)
-    //         throw err;
-    //
-    //     console.error(msg);
-    //
-    //     console.info();
-    //     console.info(yargs.help());
-    //
-    //     process.exit(0)
-    // })
+    .fail(function (msg: string, err: Error, yargs: Argv<GlobalArguments>) {
+        if (err)
+            throw err;
+
+        console.error(msg);
+
+        console.info();
+        console.info(yargs.help());
+
+        process.exit(0)
+    })
     .argv;

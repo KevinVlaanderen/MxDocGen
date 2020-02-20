@@ -1,19 +1,21 @@
 import {Argv} from "yargs";
 import {GlobalArguments} from "../cli";
 import {DocumentType, documentTypes} from "../../sdk/projectStructure";
-import {generateDocumentation} from "../../documentation/documentation";
+import {generateDocumentation} from "../../documentation";
 
 interface GenerateCommandArguments extends GlobalArguments {
     modules: string;
     ignore: string[];
-    types: DocumentType[]
+    types: DocumentType[];
+    output: string;
 }
 
 export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) =>
     yargs.options({
         "modules": {type: "string", default: ".*"},
         "ignore": {type: "array", default: "**"},
-        "types": {type: "array", choices: documentTypes, default: documentTypes}
+        "types": {type: "array", choices: documentTypes, default: documentTypes},
+        "output": {type: "string", demandOption: true, requiresArg: true}
     }).argv;
 
 export const commandGenerateHandler = async (argv: GenerateCommandArguments) => await commandGenerateDocumentation(argv);
@@ -34,6 +36,7 @@ const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
         workingCopyId: args.workingcopyid,
         modulesRegex: args.modules,
         ignorePatterns: args.ignore,
-        types: typesConfig
+        types: typesConfig,
+        outputDir: args.output
     });
 };

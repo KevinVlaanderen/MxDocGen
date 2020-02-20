@@ -1,9 +1,11 @@
-import {IModel, projects} from "mendixmodelsdk";
+import {domainmodels, IModel, microflows, projects} from "mendixmodelsdk";
 import ignore from "ignore";
 import {matchesRegex} from "../util/filters";
 import IDocument = projects.IDocument;
 import IModule = projects.IModule;
 import IFolderBase = projects.IFolderBase;
+import Microflow = microflows.Microflow;
+import DomainModel = domainmodels.DomainModel;
 
 export type DocumentType = 'microflows' | 'javaactions';
 export const documentTypes: ReadonlyArray<DocumentType> = ['microflows', 'javaactions'];
@@ -17,40 +19,33 @@ export interface ProjectStructureConfig {
 }
 
 export interface ProjectStructure {
-    [module: string]: DocumentDescription[]
+    modules: ModuleDescription[];
+}
+
+export interface ModuleDescription {
+    name: string;
+    documents: DocumentDescription[];
 }
 
 export interface DocumentDescription {
     folder?: string;
     name: string;
     document: IDocument;
+    type: string;
 }
 
-export const logProjectStructure = (projectStructure: ProjectStructure) =>
-    Object.keys(projectStructure).forEach(moduleName => {
-        console.debug(moduleName);
+export const isMicroflow = (document: DocumentDescription) => document.type === Microflow.structureTypeName;
+export const isDomainModel = (document: DocumentDescription) => document.type === DomainModel.structureTypeName;
 
-        const moduleStructure = projectStructure[moduleName];
-
-        moduleStructure.forEach(document => {
-            const path = document.folder ? [document.folder, document.name].join("/") : document.name;
-            console.debug(`   ${path}`);
-        })
-    });
-
-export const getProjectStructure = function (model: IModel, config: ProjectStructureConfig) {
-    return getModules(model)
+export const getProjectStructure = (model: IModel, config: ProjectStructureConfig) => ({
+    modules: getModules(model)
         .filter(module => matchesRegex(module.name, new RegExp(config.modulesRegex)))
         .map(module => ({
             name: module.name,
             documents: getDocuments(module)
                 .filter(createDocumentIgnoreFilter(config.ignorePatterns))
         }))
-        .reduce((previousValue, currentValue) => {
-            previousValue[currentValue.name] = currentValue.documents;
-            return previousValue;
-        }, {} as ProjectStructure);
-};
+});
 
 const getModules = (model: IModel): IModule[] => model.allModules();
 
@@ -63,7 +58,8 @@ const getDocumentDescriptions = (folderBase: IFolderBase, path?: string): Array<
             return {
                 folder: path,
                 name: document.name,
-                document: document,
+                type: document.structureTypeName,
+                document: document
             }
         })
     ];

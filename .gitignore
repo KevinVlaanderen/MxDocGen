@@ -111,5 +111,5 @@ dist
 .DS_Store
 
 # Application-specific
-config.json
-templates
+/config.json
+/out

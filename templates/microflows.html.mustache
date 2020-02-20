@@ -1,0 +1,28 @@
+﻿<h3>{{name}}</h3>
+<table>
+    <colgroup>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 60%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Return type</th>
+            <th>Documentation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#microflows}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{returnType}}</td>
+            <td>{{documentation}}</td>
+        </tr>
+        {{/microflows}}
+    </tbody>
+</table>
+
+{{#microflows}}
+{{>microflow}}
+{{/microflows}}

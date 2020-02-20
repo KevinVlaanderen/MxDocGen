@@ -1,0 +1,110 @@
+﻿<h3>Domain model</h3>
+<p>{{Documentation}}</p>
+
+<h4>Entities</h4>
+{{#HasEntities}}
+
+<table>
+    <colgroup>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 60%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Generalization</th>
+            <th>Documentation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#Entities}}
+        <tr>
+            <td><{{Name}}</td>
+            <td>{{Generalization}}</td>
+            <td>{{Documentation}}</td>
+        </tr>
+        {{/Entities}}
+    </tbody>
+</table>
+{{/HasEntities}}
+{{^HasEntities}}
+The domain model has no entities.
+{{/HasEntities}}
+
+{{#Entities}}
+<h4>Entity '{{Name}}'</h4>
+<p>{{Documentation}}</p>
+
+{{#Generalization}}
+<h5>Generalization</h5>
+<p>{{Generalization}}</p>
+{{/Generalization}}
+
+<h5>Attributes</h5>
+{{#HasAttributes}}
+<table>
+    <colgroup>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 40%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default value</th>
+            <th>Documentation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#Attributes}}
+        <tr>
+            <td>{{Name}}</td>
+            <td>{{Type}}</td>
+            <td>{{DefaultValue}}</td>
+            <td>{{Documentation}}</td>
+        </tr>
+        {{/Attributes}}
+    </tbody>
+</table>
+{{/HasAttributes}}
+{{^HasAttributes}}
+Entity '{{Name}}' has no attributes.
+{{/HasAttributes}}
+
+<h5>Associations</h5>
+{{#HasAssociations}}
+<table>
+    <colgroup>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 40%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Connected to</th>
+            <th>Multiplicity</th>
+            <th>Documentation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#Associations}}
+        <tr>
+            <td>{{Name}}</td>
+            <td>{{OtherSide}}</td>
+            <td>{{Multiplicity}}</td>
+            <td>{{Documentation}}</td>
+        </tr>
+        {{/Associations}}
+    </tbody>
+</table>
+{{/HasAssociations}}
+{{^HasAssociations}}
+Entity '{{Name}}' does not own any associations.
+{{/HasAssociations}}
+
+{{/Entities}}

@@ -1,0 +1,35 @@
+﻿<h4>{{name}}</h4>
+<p>{{documentation}}</p>
+
+<h5>Parameters</h5>
+{{#hasParameters}}
+<table>
+    <colgroup>
+        <col style="width: 20%"/>
+        <col style="width: 20%"/>
+        <col style="width: 60%"/>
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Documentation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#parameters}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{type}}</td>
+            <td>{{documentation}}</td>
+        </tr>
+        {{/parameters}}
+    </tbody>
+</table>
+{{/hasParameters}}
+{{^hasParameters}}
+This microflow has no parameters.
+{{/hasParameters}}
+
+<h5>Return type</h5>
+<p>{{returnType}}</p>
