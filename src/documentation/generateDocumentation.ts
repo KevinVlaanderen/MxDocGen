@@ -1,31 +1,37 @@
 import * as fs from 'fs';
 import {
-    DocumentDescription,
-    getProjectStructure,
-    ProjectStructure,
-    ProjectStructureConfig
-} from "../sdk/projectStructure";
+    createWorkingCopy,
+    describeProject,
+    isMicroflow,
+    ProjectDescription,
+    ProjectDescriptionConfig,
+    WorkingCopyConfig, ModuleDescription
+} from "../sdk";
 import {MendixSdkClient} from "mendixplatformsdk";
-import {createWorkingCopy, WorkingCopyConfig} from "../sdk/workingCopy";
 import Mustache from "mustache";
 import path from "path";
-import {microflowPropertyMapping} from "./microflows";
-import {getMappedProperties} from "./propertyMapping";
-import {isMicroflow} from "../sdk/documents";
+import {microflowTemplateData} from "./templatedata/microflows";
+import {microflows} from "mendixmodelsdk";
+import {v4 as uuid} from 'uuid';
+import Microflow = microflows.Microflow;
 
-interface GenerateDocumentationConfig extends WorkingCopyConfig, ProjectStructureConfig {
+interface GenerateDocumentationConfig extends WorkingCopyConfig, ProjectDescriptionConfig {
     outputDir: string;
+    template: string;
+    partials: {
+        [name: string]: string;
+    }
 }
 
 export const generateDocumentation = async (client: MendixSdkClient, config: GenerateDocumentationConfig): Promise<void> => {
     const model = await createWorkingCopy(client, config);
-    const projectStructure = getProjectStructure(model, config);
+    const projectStructure = describeProject(model, config);
+
     const templateData = await generateTemplateDataForProject(projectStructure);
-    const templates = readTemplates(path.join(process.cwd(), "templates"));
 
     console.debug(JSON.stringify(templateData, undefined, "  "));
 
-    const rendered = Mustache.render(templates.index, templateData, templates);
+    const rendered = Mustache.render(config.template, templateData, config.partials);
 
     if (!fs.existsSync(config.outputDir))
         fs.mkdirSync(config.outputDir);
@@ -33,31 +39,25 @@ export const generateDocumentation = async (client: MendixSdkClient, config: Gen
     fs.writeFileSync(path.join(config.outputDir, "index.html"), rendered);
 };
 
-const generateTemplateDataForProject = async (projectStructure: ProjectStructure) => ({
-    title: "Documentation",
-    modules: await Promise.all(projectStructure.modules.map(generateTemplateDataForModule))
+const generateTemplateDataForProject = async (projectStructure: ProjectDescription) => ({
+    Name: "Documentation",
+    Modules: await Promise.all(projectStructure.modules.map(generateTemplateDataForModule))
 });
 
-const generateTemplateDataForModule = async (module: { documents: DocumentDescription[]; name: string }) => {
+const generateTemplateDataForModule = async (module: ModuleDescription) => {
     const microflows = await Promise.all(module.documents
         .map(documentDescription => documentDescription.document)
         .filter(isMicroflow)
-        .map(microflow => getMappedProperties(microflow, microflowPropertyMapping)));
+        .map(async microflow => microflowTemplateData(await microflow.load())));
 
     return {
-        name: module.name,
-        hasMicroflows: microflows.length > 0,
-        microflows: microflows
+        ID: uuid(),
+        Name: module.name,
+        HasMicroflows: microflows.length > 0,
+        Microflows: {
+            ID: uuid(),
+            TypeName: Microflow.structureTypeName.split("$")[1],
+            Microflows: microflows
+        }
     };
 };
-
-const readTemplates = (templatesDir: string) =>
-    fs.readdirSync(templatesDir)
-        .map(file => ({
-            name: file.split(".")[0],
-            template: fs.readFileSync(path.join(templatesDir, file), {encoding: "utf8"})
-        }))
-        .reduce((obj: any, value) => {
-            obj[value.name] = value.template;
-            return obj;
-        }, {});

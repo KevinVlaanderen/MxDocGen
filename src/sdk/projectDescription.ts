@@ -1,6 +1,6 @@
 import {IModel, projects} from "mendixmodelsdk";
 import ignore from "ignore";
-import {matchesRegex} from "../util/filters";
+import {matchesRegex} from "../util";
 import IDocument = projects.IDocument;
 import IModule = projects.IModule;
 import IFolderBase = projects.IFolderBase;
@@ -8,7 +8,7 @@ import IFolderBase = projects.IFolderBase;
 export type DocumentType = 'microflows' | 'javaactions';
 export const documentTypes: ReadonlyArray<DocumentType> = ['microflows', 'javaactions'];
 
-export interface ProjectStructureConfig {
+export interface ProjectDescriptionConfig {
     modulesRegex: string;
     ignorePatterns: string[];
     types: {
@@ -16,7 +16,7 @@ export interface ProjectStructureConfig {
     }
 }
 
-export interface ProjectStructure {
+export interface ProjectDescription {
     modules: ModuleDescription[];
 }
 
@@ -32,7 +32,7 @@ export interface DocumentDescription {
     type: string;
 }
 
-export const getProjectStructure = (model: IModel, config: ProjectStructureConfig) => ({
+export const describeProject = (model: IModel, config: ProjectDescriptionConfig) => ({
     modules: getModules(model)
         .filter(module => matchesRegex(module.name, new RegExp(config.modulesRegex)))
         .map(module => ({

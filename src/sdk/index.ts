@@ -5,5 +5,5 @@
 export * from "./client";
 export * from "./dataTypes";
 export * from "./documents";
-export * from "./projectStructure";
+export * from "./projectDescription";
 export * from "./workingCopy";

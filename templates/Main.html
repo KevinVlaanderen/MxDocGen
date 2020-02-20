@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Documentation for Project '{{Name}}'</title>
+        <link href='http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css' rel='stylesheet'/>
+        <style>
+            .back-to-top {
+                text-align: right;
+                margin-bottom: 64px;
+            }
+            h5 {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class='row'>
+                <div class="span3">
+                    <div class="well" style="margin-top: 15px">
+                        <ul class="nav nav-list">
+                            <li class="nav-header">Modules</li>
+                            {{#Modules}}
+                            <li>
+                                <a href='#{{ID}}'>{{Name}}</a>
+                                <ul class="nav nav-list">
+                                    <li><a href='#{{DomainModel.ID}}'>Domain model</a></li>
+                                    {{#HasMicroflows}}
+                                    <li><a href='#{{Microflows.ID}}'>Microflows</a></li>
+                                    {{/HasMicroflows}}
+                                    {{#HasRules}}
+                                    <li><a href='#{{Rules.ID}}'>Rules</a></li>
+                                    {{/HasRules}}
+                                </ul>
+                            </li>
+                            {{/Modules}}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="span9">
+                    <h1 id="top">{{Name}}</h1>
+
+                    {{#Modules}}
+                    <h2 id='{{ID}}'>Module '{{Name}}'</h2>
+            
+                    {{#DomainModel}}
+                    {{> DomainModel}}
+                    {{/DomainModel}}
+            
+                    {{#HasMicroflows}}
+                    {{#Microflows}}
+                    {{> Microflows}}
+                    {{/Microflows}}
+                    {{/HasMicroflows}}
+            
+                    {{#HasRules}}
+                    {{#Rules}}
+                    {{> Microflows}}
+                    {{/Rules}}
+                    {{/HasRules}}
+
+                    {{/Modules}}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,6 +1,6 @@
-import {ProjectStructure} from "../sdk/projectStructure";
+import {ProjectDescription} from "../sdk/projectDescription";
 
-export const logProjectStructure = (projectStructure: ProjectStructure) =>
+export const logProjectStructure = (projectStructure: ProjectDescription) =>
     projectStructure.modules.forEach(module => {
         console.debug(module.name);
 

@@ -3,5 +3,6 @@
  */
 
 export * from "./generateDocumentation";
-export * from "./microflows";
-export * from "./propertyMapping";
+export * from "./templatedata/microflows";
+export * from "./templatedata/templateData";
+export * from "./templates/templates";

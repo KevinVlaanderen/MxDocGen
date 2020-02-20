@@ -1,7 +1,7 @@
 import {Argv} from "yargs";
 import {GlobalArguments} from "../cli";
-import {DocumentType, documentTypes} from "../../sdk/projectStructure";
-import {generateDocumentation} from "../../documentation";
+import {DocumentType, documentTypes} from "../../sdk";
+import {defaultPartials, defaultTemplate, generateDocumentation} from "../../documentation";
 
 interface GenerateCommandArguments extends GlobalArguments {
     modules: string;
@@ -37,6 +37,8 @@ const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
         modulesRegex: args.modules,
         ignorePatterns: args.ignore,
         types: typesConfig,
-        outputDir: args.output
+        outputDir: args.output,
+        template: defaultTemplate,
+        partials: defaultPartials,
     });
 };
