@@ -3,15 +3,14 @@ import {createWorkingCopy, WorkingCopyConfig} from "../sdk";
 import {MendixSdkClient} from "mendixplatformsdk";
 import Mustache from "mustache";
 import path from "path";
-import {FilterConfig} from "./filter";
 import {projectTemplateData} from "./templatedata/project";
+import {TemplateConfig} from "./templates";
+import {FilterConfig} from "./filters";
+import {projects} from "mendixmodelsdk";
+import IFolderBase = projects.IFolderBase;
 
-export interface GenerateDocumentationConfig extends WorkingCopyConfig, FilterConfig {
+export interface GenerateDocumentationConfig extends FilterConfig, TemplateConfig, WorkingCopyConfig {
     outputDir: string;
-    template: string;
-    partials: {
-        [name: string]: string;
-    }
 }
 
 export const generateDocumentation = async (client: MendixSdkClient, config: GenerateDocumentationConfig): Promise<void> => {

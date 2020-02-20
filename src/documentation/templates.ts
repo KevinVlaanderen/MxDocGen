@@ -1,6 +1,20 @@
 import path from "path";
 import pkgDir from "pkg-dir";
 import * as fs from "fs";
+import {IAbstractUnit} from "mendixmodelsdk";
+
+export interface TemplateConfig {
+    template: string;
+    partials: {
+        [name: string]: string;
+    }
+}
+
+export interface TemplateData {
+    [property: string]: string | boolean | TemplateData | Array<string | TemplateData>;
+}
+
+export type TemplateDataFactory<T extends IAbstractUnit> = (unit: T) => Promise<TemplateData>;
 
 const readTemplates = (templatesDir: string) =>
     fs.readdirSync(templatesDir)

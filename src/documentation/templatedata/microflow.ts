@@ -1,7 +1,7 @@
 import {humanReadableDataType} from "../../sdk";
 import {microflows} from "mendixmodelsdk";
 import {v4 as uuid} from "uuid";
-import {TemplateData, TemplateDataFactory} from "./templateData";
+import {TemplateData, TemplateDataFactory} from "../templates";
 import Microflow = microflows.Microflow;
 import MicroflowParameterObject = microflows.MicroflowParameterObject;
 

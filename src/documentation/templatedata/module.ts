@@ -1,11 +1,13 @@
-import {TemplateData} from "./templateData";
-import {buildDocumentPaths, getDocuments, isMicroflow} from "../../sdk";
+import {isMicroflow} from "../../sdk";
 import {v4 as uuid} from "uuid";
 import {microflows, projects} from "mendixmodelsdk";
-import {createDocumentFilter, FilterConfig} from "../filter";
+import {buildDocumentPaths, createDocumentFilter, FilterConfig} from "../filters";
+import {microflowTemplateData} from "./microflow";
+import {TemplateData} from "../templates";
 import IModule = projects.IModule;
 import Microflow = microflows.Microflow;
-import {microflowTemplateData} from "./microflow";
+import IFolderBase = projects.IFolderBase;
+import IDocument = projects.IDocument;
 
 export const moduleTemplateData = async (module: IModule, config: FilterConfig): Promise<TemplateData> => {
     const filteredDocuments = getDocuments(module)
@@ -27,3 +29,8 @@ export const moduleTemplateData = async (module: IModule, config: FilterConfig):
         }
     };
 };
+
+const getDocuments = (folderBase: IFolderBase): IDocument[] => [
+    ...folderBase.documents,
+    ...folderBase.folders.flatMap(folder => getDocuments(folder))
+];

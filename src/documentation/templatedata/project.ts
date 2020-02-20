@@ -1,11 +1,10 @@
-import {IModel} from "mendixmodelsdk";
-import {TemplateData} from "./templateData";
-import {getModules} from "../../sdk";
-import {createModuleFilter} from "../filter";
-import {GenerateDocumentationConfig} from "../generateDocumentation";
+import {IModel, projects} from "mendixmodelsdk";
+import {createModuleFilter, FilterConfig} from "../filters";
 import {moduleTemplateData} from "./module";
+import IModule = projects.IModule;
+import {TemplateData} from "../templates";
 
-export const projectTemplateData = async (model: IModel, config: GenerateDocumentationConfig): Promise<TemplateData> => {
+export const projectTemplateData = async (model: IModel, config: FilterConfig): Promise<TemplateData> => {
     const modules = getModules(model)
         .filter(createModuleFilter(new RegExp(config.modulesRegex)));
 
@@ -16,3 +15,5 @@ export const projectTemplateData = async (model: IModel, config: GenerateDocumen
                 .map(module => moduleTemplateData(module, config)))
     }
 };
+
+const getModules = (model: IModel): IModule[] => model.allModules();
