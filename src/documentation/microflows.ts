@@ -1,4 +1,4 @@
-import {stringifyDataType} from "../sdk/dataTypes";
+import {humanReadableDataType} from "../sdk/dataTypes";
 import {DocumentPropertyMapping} from "./propertyMapping";
 import {microflows} from "mendixmodelsdk";
 import Microflow = microflows.Microflow;
@@ -17,8 +17,8 @@ export const microflowPropertyMapping: DocumentPropertyMapping<Microflow> = {
             .map(microflowObject => microflowObject as MicroflowParameterObject)
             .map(microflowParameter => ({
                 name: microflowParameter.name,
-                type: stringifyDataType(microflowParameter.variableType),
+                type: humanReadableDataType(microflowParameter.variableType),
                 documentation: microflowParameter.documentation
             })),
-    returnType: (microflow: Microflow) => stringifyDataType(microflow.microflowReturnType)
+    returnType: (microflow: Microflow) => humanReadableDataType(microflow.microflowReturnType)
 };

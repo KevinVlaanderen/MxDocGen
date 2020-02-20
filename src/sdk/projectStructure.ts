@@ -1,11 +1,9 @@
-import {domainmodels, IModel, microflows, projects} from "mendixmodelsdk";
+import {IModel, projects} from "mendixmodelsdk";
 import ignore from "ignore";
 import {matchesRegex} from "../util/filters";
 import IDocument = projects.IDocument;
 import IModule = projects.IModule;
 import IFolderBase = projects.IFolderBase;
-import Microflow = microflows.Microflow;
-import DomainModel = domainmodels.DomainModel;
 
 export type DocumentType = 'microflows' | 'javaactions';
 export const documentTypes: ReadonlyArray<DocumentType> = ['microflows', 'javaactions'];
@@ -33,9 +31,6 @@ export interface DocumentDescription {
     document: IDocument;
     type: string;
 }
-
-export const isMicroflow = (document: DocumentDescription) => document.type === Microflow.structureTypeName;
-export const isDomainModel = (document: DocumentDescription) => document.type === DomainModel.structureTypeName;
 
 export const getProjectStructure = (model: IModel, config: ProjectStructureConfig) => ({
     modules: getModules(model)

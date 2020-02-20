@@ -30,13 +30,13 @@ export const isStringType = (dataType: IDataType): dataType is StringType => dat
 export const isUnknownType = (dataType: IDataType): dataType is UnknownType => dataType.structureTypeName === UnknownType.structureTypeName;
 export const isVoidType = (dataType: IDataType): dataType is VoidType => dataType.structureTypeName === VoidType.structureTypeName;
 
-export const stringifyDataType = (dataType: IDataType): string => {
+export const humanReadableDataType = (dataType: IDataType): string => {
     if (isBinaryType(dataType)) return "Binary";
     if (isBooleanType(dataType)) return "Boolean";
     if (isDateTimeType(dataType)) return "DateTime";
     if (isDecimalType(dataType)) return "Decimal";
     if (isEmptyType(dataType)) return "Empty";
-    if (isEntityType(dataType)) return dataType.entityQualifiedName;
+    if (isEntityType(dataType)) return "Entity";
     if (isEnumerationType(dataType)) return dataType.enumerationQualifiedName;
     if (isFloatType(dataType)) return "Float";
     if (isIntegerType(dataType)) return "Integer";
