@@ -1,12 +1,13 @@
 import {Argv} from "yargs";
 import {GlobalArguments} from "../cli";
 import {DocumentType, documentTypes} from "../../sdk";
-import {defaultPartials, defaultTemplate, generateDocumentation} from "../../documentation";
+import {generateDocumentation, loadDefaultTemplates, loadTemplates, TemplatesConfig} from "../../documentation";
 
 interface GenerateCommandArguments extends GlobalArguments {
     modules: string;
     ignore: string[];
     types: DocumentType[];
+    template: string;
     output: string;
 }
 
@@ -15,6 +16,7 @@ export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) =>
         "modules": {type: "string", default: ".*"},
         "ignore": {type: "array", default: "**"},
         "types": {type: "array", choices: documentTypes, default: documentTypes},
+        "template": {type: "string"},
         "output": {type: "string", demandOption: true, requiresArg: true}
     }).argv;
 
@@ -28,17 +30,22 @@ const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
         return previousValue;
     }, {} as any);
 
+    const templates: TemplatesConfig = args.template ? loadTemplates(args.template) : loadDefaultTemplates();
+
     await generateDocumentation(args.client!, {
-        mpk: args.mpk,
-        projectId: args.projectid,
-        branch: args.branch,
-        revision: args.revision,
-        workingCopyId: args.workingcopyid,
-        modulesRegex: args.modules,
-        ignorePatterns: args.ignore,
-        types: typesConfig,
-        outputDir: args.output,
-        template: defaultTemplate,
-        partials: defaultPartials,
+        filter: {
+            modulesRegex: args.modules,
+            ignorePatterns: args.ignore,
+            types: typesConfig
+        },
+        templates: templates,
+        workingCopy: {
+            mpk: args.mpk,
+            projectId: args.projectid,
+            branch: args.branch,
+            revision: args.revision,
+            workingCopyId: args.workingcopyid
+        },
+        outputDir: args.output
     });
 };

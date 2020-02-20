@@ -4,8 +4,7 @@
 
 export * from "./filters";
 export * from "./generateDocumentation";
+export * from "./templates";
 export * from "./templatedata/microflow";
 export * from "./templatedata/module";
 export * from "./templatedata/project";
-export * from "./templatedata/templateData";
-export * from "./templates";
