@@ -9,6 +9,7 @@
   "scripts": {
     "start": "node ./dist/cli/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prepack": "npm run generate-barrels",
     "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l below"
   },
   "keywords": [],
