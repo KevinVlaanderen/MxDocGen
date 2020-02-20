@@ -71,8 +71,8 @@ import JsonStructure = jsonstructures.JsonStructure;
 import DomainModel = domainmodels.DomainModel;
 import ModuleDocument = projects.ModuleDocument;
 
-export type DocumentType = 'microflows' | 'javaactions';
-export const documentTypes: ReadonlyArray<DocumentType> = ['microflows', 'javaactions'];
+export const typeName = (documentType: typeof ModuleDocument) => documentType.structureTypeName.split("$")[1];
+export const lowerTypeName = (documentType: typeof ModuleDocument) => typeName(documentType).toLowerCase();
 
 export const isBuildingBlock = (document: IModuleDocument): document is BuildingBlock => document.structureTypeName === BuildingBlock.structureTypeName;
 export const isCodeAction = (document: IModuleDocument): document is CodeAction => document.structureTypeName === CodeAction.structureTypeName;

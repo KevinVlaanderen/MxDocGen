@@ -1,6 +1,6 @@
-import {DocumentType} from "../sdk";
 import ignore from "ignore";
 import {projects} from "mendixmodelsdk";
+import {AvailableDocumentType} from "../sdk";
 import IModule = projects.IModule;
 import IDocument = projects.IDocument;
 import IFolderBase = projects.IFolderBase;
@@ -8,9 +8,7 @@ import IFolderBase = projects.IFolderBase;
 export interface FilterConfig {
     modulesRegex: string;
     ignorePatterns: string[];
-    types: {
-        [type in DocumentType]: boolean;
-    }
+    types: AvailableDocumentType[]
 }
 
 interface Paths {

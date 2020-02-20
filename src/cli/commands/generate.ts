@@ -1,24 +1,34 @@
 import {Argv} from "yargs";
 import {GlobalArguments} from "../cli";
-import {DocumentType, documentTypes} from "../../sdk";
-import {generateDocumentation, loadDefaultTemplates, loadTemplates, TemplatesConfig} from "../../documentation";
+import {
+    availableDocumentTypes,
+    defaultFilterConfig,
+    defaultTemplateConfig,
+    generateDocumentation,
+    loadTemplates,
+    TemplatesConfig
+} from "../../documentation";
 
 interface GenerateCommandArguments extends GlobalArguments {
     modules: string;
     ignore: string[];
-    types: DocumentType[];
+    types: string[];
     template: string;
     output: string;
 }
 
-export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) =>
-    yargs.options({
-        "modules": {type: "string", default: ".*"},
-        "ignore": {type: "array", default: "**"},
-        "types": {type: "array", choices: documentTypes, default: documentTypes},
-        "template": {type: "string"},
-        "output": {type: "string", demandOption: true, requiresArg: true}
+
+export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) => {
+    const filterConfig = defaultFilterConfig();
+
+    return yargs.options({
+        "modules": {type: "string", requiresArg: true, default: filterConfig.modulesRegex},
+        "ignore": {type: "array", requiresArg: true, default: filterConfig.ignorePatterns},
+        "types": {type: "array", requiresArg: true, default: filterConfig.types, choices: availableDocumentTypes},
+        "template": {type: "string", requiresArg: true},
+        "output": {type: "string", requiresArg: true, demandOption: true}
     }).argv;
+};
 
 export const commandGenerateHandler = async (argv: GenerateCommandArguments) => await commandGenerateDocumentation(argv);
 
@@ -30,7 +40,7 @@ const commandGenerateDocumentation = async (args: GenerateCommandArguments) => {
         return previousValue;
     }, {} as any);
 
-    const templates: TemplatesConfig = args.template ? loadTemplates(args.template) : loadDefaultTemplates();
+    const templates: TemplatesConfig = args.template ? loadTemplates(args.template) : defaultTemplateConfig();
 
     await generateDocumentation(args.client!, {
         filter: {

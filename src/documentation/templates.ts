@@ -1,5 +1,4 @@
 import path from "path";
-import pkgDir from "pkg-dir";
 import * as fs from "fs";
 import {IAbstractUnit} from "mendixmodelsdk";
 
@@ -15,10 +14,6 @@ export interface TemplatesConfig {
 export interface TemplateData {
     [property: string]: string | boolean | TemplateData | Array<string | TemplateData>;
 }
-
-const defaultTemplate = path.join(pkgDir.sync(__dirname)!, "templates", "Main.html");
-
-export const loadDefaultTemplates = (): TemplatesConfig => loadTemplates(defaultTemplate);
 
 export const loadTemplates = (templatePath: string): TemplatesConfig => ({
     base: fs.readFileSync(templatePath, {encoding: "utf8"}),

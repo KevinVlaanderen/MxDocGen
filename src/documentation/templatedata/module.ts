@@ -1,9 +1,9 @@
-import {isMicroflow} from "../../sdk";
 import {v4 as uuid} from "uuid";
 import {microflows, projects} from "mendixmodelsdk";
 import {buildDocumentPaths, createDocumentFilter, FilterConfig} from "../filters";
 import {microflowTemplateData} from "./microflow";
 import {TemplateData} from "../templates";
+import {isMicroflow, typeName} from "../../sdk";
 import IModule = projects.IModule;
 import Microflow = microflows.Microflow;
 import IFolderBase = projects.IFolderBase;
@@ -24,7 +24,7 @@ export const moduleTemplateData = async (module: IModule, config: FilterConfig):
         HasMicroflows: microflows.length > 0,
         Microflows: {
             ID: uuid(),
-            TypeName: Microflow.structureTypeName.split("$")[1],
+            TypeName: typeName(Microflow),
             Microflows: microflows
         }
     };

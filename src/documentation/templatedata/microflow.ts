@@ -1,4 +1,4 @@
-import {humanReadableDataType} from "../../sdk";
+import {humanReadableDataType, lowerTypeName, typeName} from "../../sdk";
 import {microflows} from "mendixmodelsdk";
 import {v4 as uuid} from "uuid";
 import {TemplateData, TemplateDataFactory} from "../templates";
@@ -16,8 +16,8 @@ export const microflowTemplateData: TemplateDataFactory<Microflow> = async (micr
         ID: uuid(),
         Name: microflow.name,
         Documentation: microflow.documentation,
-        TypeName: microflow.structureTypeName.split("$")[1],
-        LowerTypeName: microflow.structureTypeName.split("$")[1].toLowerCase(),
+        TypeName: typeName(Microflow),
+        LowerTypeName: lowerTypeName(Microflow),
         HasParameters: microflowParameterObjects.length > 0,
         Parameters: microflowParameterObjects.map(microflowParameter => ({
             Name: microflowParameter.name,
