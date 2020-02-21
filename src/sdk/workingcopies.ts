@@ -9,7 +9,7 @@ export interface WorkingCopyConfig {
     workingCopyId?: string;
 }
 
-export const createWorkingCopy = async (client: MendixSdkClient, config: WorkingCopyConfig): Promise<IModel> => {
+export const openWorkingCopy = async (client: MendixSdkClient, config: WorkingCopyConfig): Promise<IModel> => {
     if (config.mpk !== undefined) {
         const workingCopy = await client.model().createWorkingCopy({
             name: config.mpk!,

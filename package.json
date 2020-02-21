@@ -10,7 +10,8 @@
     "start": "node ./dist/cli/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepack": "npm run generate-barrels",
-    "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l below"
+    "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l below",
+    "clean-output": "rimraf out/"
   },
   "keywords": [],
   "author": "Kevin Vlaanderen",
@@ -34,6 +35,7 @@
     "@types/yargs": "^15.0.3",
     "barrelsby": "^2.2.0",
     "jest": "^25.1.0",
+    "rimraf": "^3.0.2",
     "ts-jest": "^25.2.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
