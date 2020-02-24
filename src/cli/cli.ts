@@ -2,7 +2,7 @@ import {commandGenerateBuilder, commandGenerateHandler} from "./commands/generat
 import {mendixSdkClientMiddleware} from "./middleware/mendix";
 import {MendixSdkClient} from "mendixplatformsdk";
 import yargs = require('yargs');
-import {Argv} from "yargs";
+import * as fs from "fs";
 
 export interface ProjectArguments {
     mpk?: string;
@@ -43,6 +43,7 @@ yargs
     })
     .group(["username", "apikey"], "Credentials:")
     .group(["mpk", "projectid", "revision", "branch", "workingcopyid"], "Project:")
+    .config("config",  configPath => JSON.parse(fs.readFileSync(configPath, "utf-8")))
     .middleware(mendixSdkClientMiddleware)
     .command('generate', 'Generate documentation', commandGenerateBuilder, commandGenerateHandler)
     .demandCommand(1, 'You need at least one command before moving on')
