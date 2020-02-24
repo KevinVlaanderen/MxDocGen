@@ -5,3 +5,7 @@
 export * from "./cli";
 export * from "./commands/generate";
 export * from "./middleware/mendix";
+export {setClientOptions} from "./options/client";
+export {ClientArguments} from "./options/client";
+export {setProjectOptions} from "./options/project";
+export {ProjectArguments} from "./options/project";

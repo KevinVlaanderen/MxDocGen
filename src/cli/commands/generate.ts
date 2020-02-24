@@ -1,5 +1,4 @@
 import {Argv} from "yargs";
-import {GlobalArguments} from "../cli";
 import {
     availableDocumentTypes,
     defaultFilterConfig,
@@ -7,19 +6,30 @@ import {
     defaultTemplateData,
     generateDocumentation
 } from "../../documentation";
+import {MendixSdkClient} from "mendixplatformsdk";
+import {ClientArguments, GlobalArguments, ProjectArguments, setClientOptions, setProjectOptions} from "..";
 
-interface GenerateCommandArguments extends GlobalArguments {
+interface FilterArguments {
     modules: string;
     ignore: string[];
     types: string[];
+}
+
+interface TemplateArguments {
     templateDirectory: string;
     templateExtension: string;
     templateMain: string;
+}
+
+interface GenerateCommandArguments extends GlobalArguments, ClientArguments, ProjectArguments, FilterArguments, TemplateArguments {
     output: string;
 }
 
-export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) =>
-    yargs
+export const commandGenerateBuilder = (yargs: Argv) => {
+    yargs = setClientOptions(yargs);
+    yargs = setProjectOptions(yargs);
+
+    return yargs
         .options({
             modules: {type: "string", requiresArg: true, default: defaultFilterConfig.modulesRegex},
             ignore: {type: "array", requiresArg: true, default: defaultFilterConfig.ignorePatterns},
@@ -40,11 +50,14 @@ export const commandGenerateBuilder = (yargs: Argv<GlobalArguments>) =>
             templatemain: ["templatedir", "templateext"]
         })
         .argv;
+};
 
 export const commandGenerateHandler = async (args: GenerateCommandArguments) => {
     console.log('Generating documentation...');
 
-    await generateDocumentation(args.client!, {
+    const client = new MendixSdkClient(args.username, args.apikey);
+
+    await generateDocumentation(client, {
         outputDir: args.output,
         filterConfig: {
             modulesRegex: args.modules,
