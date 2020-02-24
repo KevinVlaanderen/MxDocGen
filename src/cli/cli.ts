@@ -47,4 +47,5 @@ yargs
     .middleware(mendixSdkClientMiddleware)
     .command('generate', 'Generate documentation', commandGenerateBuilder, commandGenerateHandler)
     .demandCommand(1, 'You need at least one command before moving on')
+    .showHelpOnFail(false, "Specify --help for available options")
     .argv;
