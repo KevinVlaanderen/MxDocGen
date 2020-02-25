@@ -10,7 +10,7 @@
     "start": "node ./dist/cli/cli.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepack": "npm run generate-barrels",
-    "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l below",
+    "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l all",
     "clean-output": "rimraf out/"
   },
   "keywords": [],
@@ -18,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/when": "^2.4.33",
+    "fs-extra": "^8.1.0",
     "ignore": "^5.1.4",
     "mendixmodelsdk": "^4.29.0",
     "mendixplatformsdk": "^4.1.1",
@@ -28,6 +29,7 @@
     "yargs": "^15.1.0"
   },
   "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
     "@types/jest": "^25.1.2",
     "@types/mustache": "^4.0.0",
     "@types/node": "^13.7.1",

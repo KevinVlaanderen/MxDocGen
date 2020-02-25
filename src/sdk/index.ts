@@ -3,6 +3,6 @@
  */
 
 export * from "./client";
-export * from "./dataTypes";
+export * from "./datatypes";
 export * from "./documents";
-export * from "./workingCopies";
+export * from "./workingcopies";

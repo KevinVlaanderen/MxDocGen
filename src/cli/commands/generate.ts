@@ -7,7 +7,8 @@ import {
     generateDocumentation
 } from "../../documentation";
 import {MendixSdkClient} from "mendixplatformsdk";
-import {ClientArguments, GlobalArguments, ProjectArguments, setClientOptions, setProjectOptions} from "..";
+import {GlobalArguments} from "../cli";
+import {ClientArguments, ProjectArguments, setClientOptions, setProjectOptions} from "../options";
 
 interface FilterArguments {
     modules: string;
@@ -25,7 +26,13 @@ interface GenerateCommandArguments extends GlobalArguments, ClientArguments, Pro
     output: string;
 }
 
-export const commandGenerateBuilder = (yargs: Argv) => {
+export const addGenerateCommand = (yargs: Argv) =>
+    yargs
+        .command("generate <target>", "Generate documentation",
+            generateCommandBuilder,
+            generateCommandHandler);
+
+const generateCommandBuilder = (yargs: Argv) => {
     yargs = setClientOptions(yargs);
     yargs = setProjectOptions(yargs);
 
@@ -52,9 +59,7 @@ export const commandGenerateBuilder = (yargs: Argv) => {
         .argv;
 };
 
-export const commandGenerateHandler = async (args: GenerateCommandArguments) => {
-    console.log('Generating documentation...');
-
+const generateCommandHandler = async (args: GenerateCommandArguments) => {
     const client = new MendixSdkClient(args.username, args.apikey);
 
     await generateDocumentation(client, {
