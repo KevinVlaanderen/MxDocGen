@@ -2,25 +2,20 @@ import {MendixSdkClient} from "mendixplatformsdk";
 import {IModel} from "mendixmodelsdk";
 
 export interface MpkProjectConfig extends ProjectConfig {
-    type: "mpk";
     mpk: string;
 }
 
 export interface SvnProjectConfig extends ProjectConfig {
-    type: "svn";
     projectId: string;
     branch: string;
     revision: number;
 }
 
 export interface WorkingCopyProjectConfig extends ProjectConfig {
-    type: "workingcopy";
     workingCopyId: string;
 }
 
-export interface ProjectConfig {
-    type: "mpk" | "svn" | "workingcopy"
-}
+export interface ProjectConfig {}
 
 export const openWorkingCopy = async (client: MendixSdkClient, config: ProjectConfig): Promise<IModel> => {
     if (isMpkProjectconfig(config)) {
@@ -50,14 +45,13 @@ export const openWorkingCopy = async (client: MendixSdkClient, config: ProjectCo
     }
 };
 
-const isMpkProjectconfig = (config: ProjectConfig): config is MpkProjectConfig => {
-    return config.type === "mpk";
-};
+const isMpkProjectconfig = (config: ProjectConfig): config is MpkProjectConfig =>
+    (config as MpkProjectConfig).mpk !== undefined;
 
-const isSvnProjectconfig = (config: ProjectConfig): config is SvnProjectConfig => {
-    return config.type === "svn";
-};
+const isSvnProjectconfig = (config: ProjectConfig): config is SvnProjectConfig =>
+    (config as SvnProjectConfig).projectId !== undefined &&
+    (config as SvnProjectConfig).branch !== undefined &&
+    (config as SvnProjectConfig).revision !== undefined;
 
-const isWorkingCopyProjectconfig = (config: ProjectConfig): config is WorkingCopyProjectConfig => {
-    return config.type === "workingcopy";
-};
+const isWorkingCopyProjectconfig = (config: ProjectConfig): config is WorkingCopyProjectConfig =>
+    (config as WorkingCopyProjectConfig).workingCopyId !== undefined;

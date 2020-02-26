@@ -5,7 +5,7 @@ import path from "path";
 import {loadTemplates, TemplateConfig, TemplateData} from "./templates";
 import {FilterConfig} from "./filters";
 import {IModel} from "mendixmodelsdk";
-import {openWorkingCopy, ProjectConfig} from "../sdk/projects";
+import {openWorkingCopy, ProjectConfig} from "../sdk";
 
 export interface GenerateDocumentationConfig {
     outputDir: string;

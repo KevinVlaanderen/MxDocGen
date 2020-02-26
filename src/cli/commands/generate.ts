@@ -9,7 +9,7 @@ import {
 import {MendixSdkClient} from "mendixplatformsdk";
 import {GlobalArguments} from "../cli";
 import {ClientArguments, ProjectArguments, setClientOptions, setProjectOptions} from "../options";
-import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk/projects";
+import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk";
 
 interface FilterArguments {
     modules: string;
@@ -101,13 +101,10 @@ const getTemplateConfig = (args: GenerateCommandArguments) => ({
 
 const getProjectConfig = (args: GenerateCommandArguments): MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined =>
     args.mpk ? {
-        type: "mpk",
         mpk: args.mpk
     } : args.workingcopyid ? {
-        type: "workingcopy",
         workingCopyId: args.workingcopyid
     } : args.projectid && args.branch && args.revision ? {
-        type: "svn",
         projectId: args.projectid,
         branch: args.branch,
         revision: args.revision
