@@ -5,4 +5,4 @@
 export * from "./client";
 export * from "./datatypes";
 export * from "./documents";
-export * from "./workingcopies";
+export * from "./projects";

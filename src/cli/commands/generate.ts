@@ -9,6 +9,7 @@ import {
 import {MendixSdkClient} from "mendixplatformsdk";
 import {GlobalArguments} from "../cli";
 import {ClientArguments, ProjectArguments, setClientOptions, setProjectOptions} from "../options";
+import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk/projects";
 
 interface FilterArguments {
     modules: string;
@@ -28,7 +29,7 @@ interface GenerateCommandArguments extends GlobalArguments, ClientArguments, Pro
 
 export const addGenerateCommand = (yargs: Argv) =>
     yargs
-        .command("generate <target>", "Generate documentation",
+        .command("generate", "Generate documentation",
             generateCommandBuilder,
             generateCommandHandler);
 
@@ -62,25 +63,52 @@ const generateCommandBuilder = (yargs: Argv) => {
 const generateCommandHandler = async (args: GenerateCommandArguments) => {
     const client = new MendixSdkClient(args.username, args.apikey);
 
+    const outputDir = getOutputDir(args);
+
+    const filterConfig = getFilterConfig(args);
+    const templateConfig = getTemplateConfig(args);
+    const projectConfig = getProjectConfig(args);
+
+    const templateData = getTemplateData();
+
+    if (!projectConfig)
+        throw new Error("Invalid project configuration");
+
     await generateDocumentation(client, {
-        outputDir: args.output,
-        filterConfig: {
-            modulesRegex: args.modules,
-            ignorePatterns: args.ignore,
-            types: args.types
-        },
-        templateConfig: {
-            directory: args.templateDirectory ?? defaultTemplateConfig.directory,
-            extension: args.templateExtension ?? defaultTemplateConfig.extension,
-            main: args.templateMain ?? defaultTemplateConfig.main
-        },
-        workingCopyConfig: {
-            mpk: args.mpk,
-            projectId: args.projectid,
-            branch: args.branch,
-            revision: args.revision,
-            workingCopyId: args.workingcopyid
-        },
-        templateData: defaultTemplateData
+        outputDir,
+        filterConfig,
+        templateConfig,
+        projectConfig,
+        templateData
     });
 };
+
+const getOutputDir = (args: GenerateCommandArguments) => args.output;
+
+const getTemplateData = () => defaultTemplateData;
+
+const getFilterConfig = (args: GenerateCommandArguments) => ({
+    modulesRegex: args.modules,
+    ignorePatterns: args.ignore,
+    types: args.types
+});
+
+const getTemplateConfig = (args: GenerateCommandArguments) => ({
+    directory: args.templateDirectory ?? defaultTemplateConfig.directory,
+    extension: args.templateExtension ?? defaultTemplateConfig.extension,
+    main: args.templateMain ?? defaultTemplateConfig.main
+});
+
+const getProjectConfig = (args: GenerateCommandArguments): MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined =>
+    args.mpk ? {
+        type: "mpk",
+        mpk: args.mpk
+    } : args.workingcopyid ? {
+        type: "workingcopy",
+        workingCopyId: args.workingcopyid
+    } : args.projectid && args.branch && args.revision ? {
+        type: "svn",
+        projectId: args.projectid,
+        branch: args.branch,
+        revision: args.revision
+    } : undefined;

@@ -5,5 +5,3 @@
 export * from "./cli";
 export * from "./commands/index";
 export * from "./options/index";
-export {addGenerateCommand} from "./commands";
-export {addCopyTemplatesCommand} from "./commands/copytemplates";
