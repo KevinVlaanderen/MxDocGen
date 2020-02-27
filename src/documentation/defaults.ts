@@ -3,7 +3,7 @@ import pkgDir from "pkg-dir";
 import {TemplateConfig} from "./templates";
 import {javaactions, microflows} from "mendixmodelsdk";
 import {lowerTypeName} from "../sdk";
-import {projectTemplateData} from "./templatedata/project";
+import {projectTemplateData} from "./defaulttemplatedata";
 import {FilterConfig} from "./filters";
 import Microflow = microflows.Microflow;
 import JavaAction = javaactions.JavaAction;
@@ -22,4 +22,4 @@ export const defaultTemplateConfig: TemplateConfig = {
     main: "Main"
 };
 
-export const defaultTemplateData = projectTemplateData;
+export const defaultTemplateDataProvider = projectTemplateData;

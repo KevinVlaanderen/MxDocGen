@@ -12,7 +12,7 @@ export interface GenerateDocumentationConfig {
     filterConfig: FilterConfig;
     templateConfig: TemplateConfig;
     projectConfig: ProjectConfig;
-    templateData: (model: IModel, filterConfig: FilterConfig) => Promise<TemplateData>;
+    templateDataProvider: (model: IModel, filterConfig: FilterConfig) => Promise<TemplateData>;
 }
 
 export const generateDocumentation = async (client: MendixSdkClient, config: GenerateDocumentationConfig): Promise<void> => {
@@ -23,7 +23,7 @@ export const generateDocumentation = async (client: MendixSdkClient, config: Gen
     const templates = loadTemplates(templateConfig.directory, templateConfig.extension, templateConfig.main);
     const model = await openWorkingCopy(client, workingCopyConfig);
 
-    const templateData = await config.templateData(model, filterConfig);
+    const templateData = await config.templateDataProvider(model, filterConfig);
 
     const rendered = Mustache.render(templates.main, templateData, templates.partials);
 

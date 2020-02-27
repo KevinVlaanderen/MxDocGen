@@ -3,7 +3,7 @@ import {
     availableDocumentTypes,
     defaultFilterConfig,
     defaultTemplateConfig,
-    defaultTemplateData,
+    defaultTemplateDataProvider,
     generateDocumentation
 } from "../../documentation";
 import {MendixSdkClient} from "mendixplatformsdk";
@@ -69,7 +69,7 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
     const templateConfig = getTemplateConfig(args);
     const projectConfig = getProjectConfig(args);
 
-    const templateData = getTemplateData();
+    const templateDataProvider = getTemplateDataProvider();
 
     if (!projectConfig)
         throw new Error("Invalid project configuration");
@@ -79,13 +79,13 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
         filterConfig,
         templateConfig,
         projectConfig,
-        templateData
+        templateDataProvider
     });
 };
 
 const getOutputDir = (args: GenerateCommandArguments) => args.output;
 
-const getTemplateData = () => defaultTemplateData;
+const getTemplateDataProvider = () => defaultTemplateDataProvider;
 
 const getFilterConfig = (args: GenerateCommandArguments) => ({
     modulesRegex: args.modules,
