@@ -6,4 +6,4 @@ export * from "./defaults";
 export * from "./filters";
 export * from "./generatedocumentation";
 export * from "./templates";
-export * from "./templatedata/index";
+export * from "./defaulttemplatedata/index";
