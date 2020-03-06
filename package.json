@@ -9,11 +9,13 @@
   "bin": "dist/cli/cli.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "clean": "npm run clean-generated && npm run clean-output",
+    "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
     "docs": "node ./docs/generate.js",
     "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l all",
     "prepack": "npm run generate-barrels && tsc",
-    "start": "tsc && node ./dist/cli/cli.js"
+    "start": "npm run generate-barrels && tsc && node ./dist/cli/cli.js"
   },
   "dependencies": {
     "@types/when": "^2.4.33",

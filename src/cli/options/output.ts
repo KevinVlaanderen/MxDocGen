@@ -1,4 +1,5 @@
 import {Argv} from "yargs";
+import {defaultOutputConfig} from "../../documentation";
 
 export interface OutputArguments {
     outputDirectory: string;
@@ -7,7 +8,7 @@ export interface OutputArguments {
 
 export const registerOutputOptions = (yargs: Argv) => yargs
     .options({
-        outputDirectory: {type: "string", requiresArg: true, demandOption: true},
-        outputFilename: {type: "string", requiresArg: true, demandOption: true, default: "index.html"}
+        outputDirectory: {type: "string", requiresArg: true, demandOption: true, default: defaultOutputConfig.directory},
+        outputFilename: {type: "string", requiresArg: true, demandOption: true, default: defaultOutputConfig.filename}
     })
     .group(["outputDirectory", "outputFilename"], "Output:");

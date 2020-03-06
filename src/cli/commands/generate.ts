@@ -48,15 +48,13 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
         throw new Error("Invalid project configuration");
 
     await generateDocumentation(client, {
-        output: outputConfig,
+        project: projectConfig,
         filters: filterConfig,
         templates: templateConfig,
-        project: projectConfig,
+        output: outputConfig,
         templateData: templateDataProvider
     });
 };
-
-const getTemplateDataProvider = () => defaultTemplateDataProvider;
 
 const getProjectConfig = (args: GenerateCommandArguments): MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined =>
     args.mpk ? {
@@ -85,3 +83,5 @@ const getOutputConfig = (args: GenerateCommandArguments) => ({
     directory: args.outputDirectory,
     filename: args.outputFilename
 });
+
+const getTemplateDataProvider = () => defaultTemplateDataProvider;

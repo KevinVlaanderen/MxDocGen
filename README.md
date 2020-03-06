@@ -74,7 +74,7 @@ Templates:
   --templatemain                                                        [string]
 
 Output:
-  --outputDirectory                                          [string] [required]
+  --outputDirectory                         [string] [required] [default: "out"]
   --outputFilename                   [string] [required] [default: "index.html"]
 
 Options:

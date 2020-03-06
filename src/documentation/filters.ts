@@ -1,8 +1,11 @@
 import ignore from "ignore";
-import {projects} from "mendixmodelsdk";
+import {javaactions, microflows, projects} from "mendixmodelsdk";
+import {lowerTypeName} from "../sdk";
 import IModule = projects.IModule;
 import IDocument = projects.IDocument;
 import IFolderBase = projects.IFolderBase;
+import Microflow = microflows.Microflow;
+import JavaAction = javaactions.JavaAction;
 
 export interface FilterConfig {
     modulesRegex: string;
@@ -13,6 +16,14 @@ export interface FilterConfig {
 interface Paths {
     [name: string]: string;
 }
+
+export const availableDocumentTypes = [Microflow, JavaAction].map(documentType => lowerTypeName(documentType));
+
+export const defaultFilterConfig: FilterConfig = {
+    modulesRegex: ".*",
+    ignorePatterns: ["**"],
+    types: availableDocumentTypes
+};
 
 export const createDocumentFilter = (ignorePatterns: string[], paths: Paths): (document: projects.IDocument) => boolean => {
     const ig = ignore().add(ignorePatterns);

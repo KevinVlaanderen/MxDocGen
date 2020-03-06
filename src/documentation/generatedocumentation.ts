@@ -6,11 +6,7 @@ import {loadTemplates, TemplateConfig, TemplateData} from "./templates";
 import {FilterConfig} from "./filters";
 import {IModel} from "mendixmodelsdk";
 import {openWorkingCopy, ProjectConfig} from "../sdk";
-
-interface OutputConfig {
-    directory: string;
-    filename: string;
-}
+import {OutputConfig} from "./output";
 
 export interface GenerateDocumentationConfig {
     output: OutputConfig;

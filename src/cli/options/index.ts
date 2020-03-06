@@ -3,7 +3,7 @@
  */
 
 export * from "./client";
-export * from "./filter";
+export * from "./filters";
 export * from "./output";
 export * from "./project";
-export * from "./template";
+export * from "./templates";

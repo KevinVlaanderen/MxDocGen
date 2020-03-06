@@ -1,6 +1,7 @@
 import path from "path";
 import * as fs from "fs";
 import {IAbstractUnit} from "mendixmodelsdk";
+import pkgDir from "pkg-dir";
 
 export type TemplateDataFactory<T extends IAbstractUnit> = (unit: T) => Promise<TemplateData>;
 
@@ -18,6 +19,12 @@ export interface Templates {
 export interface TemplateData {
     [property: string]: string | boolean | TemplateData | Array<string | TemplateData>;
 }
+
+export const defaultTemplateConfig: TemplateConfig = {
+    directory: path.join(pkgDir.sync(__dirname)!, "templates"),
+    extension: ".html",
+    main: "Main"
+};
 
 export const loadTemplates = (directory: string, extension: string, main: string): Templates => ({
     main: loadTemplate(directory, extension, main),
