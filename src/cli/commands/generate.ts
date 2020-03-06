@@ -1,75 +1,46 @@
 import {Argv} from "yargs";
-import {
-    availableDocumentTypes,
-    defaultFilterConfig,
-    defaultTemplateConfig,
-    defaultTemplateDataProvider,
-    generateDocumentation
-} from "../../documentation";
+import {defaultTemplateConfig, defaultTemplateDataProvider, generateDocumentation} from "../../documentation";
 import {MendixSdkClient} from "mendixplatformsdk";
 import {GlobalArguments} from "../cli";
-import {ClientArguments, ProjectArguments, setClientOptions, setProjectOptions} from "../options";
+import {
+    ClientArguments,
+    FilterArguments,
+    ProjectArguments,
+    TemplateArguments,
+    OutputArguments,
+    registerClientOptions,
+    registerFilterOptions,
+    registerProjectOptions,
+    registerTemplateOptions,
+    registerOutputOptions
+} from "../options";
 import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk";
 
-interface FilterArguments {
-    modules: string;
-    ignore: string[];
-    types: string[];
-}
+interface GenerateCommandArguments extends GlobalArguments,ClientArguments, ProjectArguments, FilterArguments, TemplateArguments, OutputArguments {}
 
-interface TemplateArguments {
-    templateDirectory: string;
-    templateExtension: string;
-    templateMain: string;
-}
-
-interface GenerateCommandArguments extends GlobalArguments, ClientArguments, ProjectArguments, FilterArguments, TemplateArguments {
-    output: string;
-}
-
-export const addGenerateCommand = (yargs: Argv) =>
+export const registerGenerateCommand = (yargs: Argv) =>
     yargs
         .command("generate", "Generate documentation",
             generateCommandBuilder,
             generateCommandHandler);
 
 const generateCommandBuilder = (yargs: Argv) => {
-    yargs = setClientOptions(yargs);
-    yargs = setProjectOptions(yargs);
+    yargs = registerClientOptions(yargs);
+    yargs = registerProjectOptions(yargs);
+    yargs = registerFilterOptions(yargs);
+    yargs = registerTemplateOptions(yargs);
+    yargs = registerOutputOptions(yargs);
 
-    return yargs
-        .options({
-            modules: {type: "string", requiresArg: true, default: defaultFilterConfig.modulesRegex},
-            ignore: {type: "array", requiresArg: true, default: defaultFilterConfig.ignorePatterns},
-            types: {
-                type: "array",
-                requiresArg: true,
-                default: defaultFilterConfig.types,
-                choices: availableDocumentTypes
-            },
-            templatedir: {type: "string", requiresArg: true},
-            templateext: {type: "string", requiresArg: true},
-            templatemain: {type: "string", requiresArg: true},
-            output: {type: "string", requiresArg: true, demandOption: true}
-        })
-        .group(["modules", "ignore", "types"], "Filters:")
-        .group(["templatedir", "templateext", "templatemain"], "Templates:")
-        .implies({
-            templatedir: ["templateext", "templatemain"],
-            templateext: ["templatedir", "templatemain"],
-            templatemain: ["templatedir", "templateext"]
-        })
-        .argv;
+    return yargs.argv;
 };
 
 const generateCommandHandler = async (args: GenerateCommandArguments) => {
     const client = new MendixSdkClient(args.username, args.apikey);
 
-    const outputDir = getOutputDir(args);
-
+    const projectConfig = getProjectConfig(args);
     const filterConfig = getFilterConfig(args);
     const templateConfig = getTemplateConfig(args);
-    const projectConfig = getProjectConfig(args);
+    const outputConfig = getOutputConfig(args);
 
     const templateDataProvider = getTemplateDataProvider();
 
@@ -77,17 +48,26 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
         throw new Error("Invalid project configuration");
 
     await generateDocumentation(client, {
-        outputDir,
-        filterConfig,
-        templateConfig,
-        projectConfig,
-        templateDataProvider
+        output: outputConfig,
+        filters: filterConfig,
+        templates: templateConfig,
+        project: projectConfig,
+        templateData: templateDataProvider
     });
 };
 
-const getOutputDir = (args: GenerateCommandArguments) => args.output;
-
 const getTemplateDataProvider = () => defaultTemplateDataProvider;
+
+const getProjectConfig = (args: GenerateCommandArguments): MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined =>
+    args.mpk ? {
+        mpk: args.mpk
+    } : args.workingcopyid ? {
+        workingCopyId: args.workingcopyid
+    } : args.projectid && args.branch && args.revision ? {
+        projectId: args.projectid,
+        branch: args.branch,
+        revision: args.revision
+    } : undefined;
 
 const getFilterConfig = (args: GenerateCommandArguments) => ({
     modulesRegex: args.modules,
@@ -101,13 +81,7 @@ const getTemplateConfig = (args: GenerateCommandArguments) => ({
     main: args.templateMain ?? defaultTemplateConfig.main
 });
 
-const getProjectConfig = (args: GenerateCommandArguments): MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined =>
-    args.mpk ? {
-        mpk: args.mpk
-    } : args.workingcopyid ? {
-        workingCopyId: args.workingcopyid
-    } : args.projectid && args.branch && args.revision ? {
-        projectId: args.projectid,
-        branch: args.branch,
-        revision: args.revision
-    } : undefined;
+const getOutputConfig = (args: GenerateCommandArguments) => ({
+    directory: args.outputDirectory,
+    filename: args.outputFilename
+});

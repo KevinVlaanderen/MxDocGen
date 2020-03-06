@@ -73,11 +73,14 @@ Templates:
   --templateext                                                         [string]
   --templatemain                                                        [string]
 
+Output:
+  --outputDirectory                                          [string] [required]
+  --outputFilename                   [string] [required] [default: "index.html"]
+
 Options:
   --help     Show help                                                 [boolean]
   --version  Show version number                                       [boolean]
   --config   Path to JSON config file
-  --output                                                   [string] [required]
 ```
 
 #### Copy templates

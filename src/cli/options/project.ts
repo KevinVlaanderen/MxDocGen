@@ -8,7 +8,7 @@ export interface ProjectArguments {
     workingcopyid?: string;
 }
 
-export const setProjectOptions = (yargs: Argv) => yargs
+export const registerProjectOptions = (yargs: Argv) => yargs
     .options({
         mpk: {type: "string", requiresArg: true},
         projectid: {type: "string", requiresArg: true},

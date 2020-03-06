@@ -1,12 +1,12 @@
 import * as fs from "fs";
-import {addCopyTemplatesCommand, addGenerateCommand} from "./commands";
+import {registerCopyTemplatesCommand, registerGenerateCommand} from "./commands";
 
 let yargs = require("yargs");
 
 export interface GlobalArguments {}
 
-yargs = addGenerateCommand(yargs);
-yargs = addCopyTemplatesCommand(yargs);
+yargs = registerGenerateCommand(yargs);
+yargs = registerCopyTemplatesCommand(yargs);
 
 yargs
     .config("config",  (configPath: string) => JSON.parse(fs.readFileSync(configPath, "utf-8")))

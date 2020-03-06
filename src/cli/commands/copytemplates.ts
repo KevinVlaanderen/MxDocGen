@@ -9,7 +9,7 @@ interface CopyTemplatesCommandArguments extends GlobalArguments {
     target: string;
 }
 
-export const addCopyTemplatesCommand = (yargs: Argv) =>
+export const registerCopyTemplatesCommand = (yargs: Argv) =>
     yargs
         .command("copy-templates <target>", "Copy the default templates to another location for modification",
             copyTemplatesCommandBuilder,

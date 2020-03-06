@@ -5,7 +5,7 @@ export interface ClientArguments {
     apikey: string;
 }
 
-export const setClientOptions = (yargs: Argv) => yargs
+export const registerClientOptions = (yargs: Argv) => yargs
     .options({
         username: {type: "string", demandOption: true, requiresArg: true},
         apikey: {type: "string", demandOption: true, requiresArg: true}
