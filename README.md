@@ -83,6 +83,9 @@ Options:
 #### Copy templates
 
 ```
+Positionals:
+  target  Target directory for the templates                 [string] [required]
+
 Options:
   --help     Show help                                                 [boolean]
   --version  Show version number                                       [boolean]

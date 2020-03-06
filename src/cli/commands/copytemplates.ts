@@ -16,7 +16,12 @@ export const addCopyTemplatesCommand = (yargs: Argv) =>
             copyTemplatesCommandHandler);
 
 const copyTemplatesCommandBuilder = (yargs: Argv) =>
-    yargs.argv;
+    yargs
+        .positional("target", {
+            describe: "Target directory for the templates",
+            type: "string"
+        })
+        .argv;
 
 const copyTemplatesCommandHandler = async (args: CopyTemplatesCommandArguments) => {
     const targetDirectory = args.target.startsWith("~/")
