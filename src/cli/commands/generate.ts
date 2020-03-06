@@ -52,6 +52,8 @@ const generateCommandBuilder = (yargs: Argv) => {
             templatemain: {type: "string", requiresArg: true},
             output: {type: "string", requiresArg: true, demandOption: true}
         })
+        .group(["modules", "ignore", "types"], "Filters:")
+        .group(["templatedir", "templateext", "templatemain"], "Templates:")
         .implies({
             templatedir: ["templateext", "templatemain"],
             templateext: ["templatedir", "templatemain"],

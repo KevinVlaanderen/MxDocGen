@@ -113,3 +113,4 @@ dist
 # Application-specific
 /config.json
 /out
+/docs/generated
