@@ -65,8 +65,6 @@ Project:
 Filters:
   --modules                                             [string] [default: ".*"]
   --ignore                                             [array] [default: ["**"]]
-  --types                 [array] [choices: "microflow", "javaaction"] [default:
-                                                     ["microflow","javaaction"]]
 
 Templates:
   --templatedir                                                         [string]

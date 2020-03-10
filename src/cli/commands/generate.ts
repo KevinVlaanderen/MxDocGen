@@ -4,11 +4,7 @@ import { OutputArguments, registerOutputOptions } from "../options/output";
 import { ProjectArguments, registerProjectOptions } from "../options/project";
 import { DefaultProcessor } from "../../documentation/defaultprocessor";
 import { registerTemplateOptions, TemplateArguments } from "../options/templates";
-import {
-	createDocumentTypeFilter,
-	createGlobDocumentFilter,
-	createRegexModuleFilter
-} from "../../documentation/filters";
+import { createGlobDocumentFilter, createRegexModuleFilter } from "../../documentation/filters";
 import { GlobalArguments } from "../cli";
 import { FilterArguments, registerFilterOptions } from "../options/filters";
 import { defaultTemplateConfig } from "../../documentation/templates";
@@ -51,10 +47,9 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
 	const outputConfig = getOutputConfig(args);
 
 	const moduleFilter = createRegexModuleFilter(new RegExp(filterConfig.modulesRegex));
-	const documentFilter = createGlobDocumentFilter(filterConfig.ignorePatterns ?? []);
-	const documentTypeFilter = createDocumentTypeFilter(filterConfig.types);
+	const documentFilter = createGlobDocumentFilter(filterConfig.documentIgnorePatterns ?? []);
 
-	const processor = new DefaultProcessor(moduleFilter, documentFilter, documentTypeFilter);
+	const processor = new DefaultProcessor(moduleFilter, documentFilter);
 
 	if (!projectConfig) throw new Error("Invalid project configuration");
 
@@ -88,8 +83,7 @@ const getProjectConfig = (
 
 const getFilterConfig = (args: GenerateCommandArguments) => ({
 	modulesRegex: args.modules,
-	ignorePatterns: args.ignore,
-	types: args.types
+	documentIgnorePatterns: args.ignore
 });
 
 const getTemplateConfig = (args: GenerateCommandArguments) => ({

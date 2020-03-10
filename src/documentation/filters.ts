@@ -1,30 +1,23 @@
 import ignore from "ignore";
-import { javaactions, microflows, projects } from "mendixmodelsdk";
+import { projects } from "mendixmodelsdk";
 import IFolderBase = projects.IFolderBase;
-import Microflow = microflows.Microflow;
-import JavaAction = javaactions.JavaAction;
 import IModule = projects.IModule;
 import IDocument = projects.IDocument;
 import Folder = projects.Folder;
 
 export interface FilterConfig {
 	modulesRegex: string;
-	ignorePatterns: string[];
-	types: string[];
+	documentIgnorePatterns: string[];
 }
-
-export const availableDocumentTypes = [Microflow, JavaAction];
 
 export const defaultFilterConfig: FilterConfig = {
 	modulesRegex: ".*",
-	ignorePatterns: ["**"],
-	types: availableDocumentTypes.map(documentType =>
-		documentType.structureTypeName.split("$")[1].toLowerCase()
-	)
+	documentIgnorePatterns: ["**"]
 };
 
 export const createRegexModuleFilter = (filter?: RegExp): ((module: IModule) => boolean) =>
 	filter ? (module: IModule) => module.name.match(filter) !== null : () => true;
+
 export const defaultModuleFilter = createRegexModuleFilter(
 	new RegExp(defaultFilterConfig.modulesRegex)
 );
@@ -38,13 +31,10 @@ export const createGlobDocumentFilter = (
 		return !ig.ignores(path);
 	};
 };
-export const defaultDocumentFilter = createGlobDocumentFilter(defaultFilterConfig.ignorePatterns);
 
-export const createDocumentTypeFilter = (types: string[]): ((document: IDocument) => boolean) => {
-	return (document: IDocument) =>
-		types.includes(document.structureTypeName.split("$")[1].toLowerCase());
-};
-export const defaultDocumentTypeFilter = createDocumentTypeFilter(defaultFilterConfig.types);
+export const defaultDocumentFilter = createGlobDocumentFilter(
+	defaultFilterConfig.documentIgnorePatterns
+);
 
 const buildDocumentPath = (document: IDocument): string => {
 	const documentPath: string[] = [document.name];
