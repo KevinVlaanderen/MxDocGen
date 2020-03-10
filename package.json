@@ -14,9 +14,9 @@
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
     "docs": "node ./docs/generate.js",
-    "prepack": "npm run barrels && tsc",
+    "prepublish": "tsc",
     "prettier": "npx prettier --write \"src/**/*.{js,ts,json}\"",
-    "start": "npm run barrels && tsc && node ./dist/cli/cli.js"
+    "start": "tsc && node ./dist/cli/cli.js"
   },
   "prettier": {
     "printWidth": 100,
