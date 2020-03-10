@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import {MendixSdkClient} from "mendixplatformsdk";
+import {IModel} from "mendixmodelsdk";
 import Mustache from "mustache";
 import path from "path";
+import {openWorkingCopy, ProjectConfig} from "../sdk/projects";
+import {OutputConfig} from "./output";
 import {loadTemplates, TemplateConfig} from "./templates";
 import {FilterConfig} from "./filters";
-import {openWorkingCopy, ProjectConfig} from "../sdk";
-import {OutputConfig} from "./output";
-import {IModel} from "mendixmodelsdk";
 
 export interface TemplateData {
     [property: string]: string | number | boolean | undefined | TemplateData | Array<TemplateData>;

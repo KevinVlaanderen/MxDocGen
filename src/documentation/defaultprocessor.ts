@@ -1,14 +1,15 @@
 import {IModel, microflows, projects} from "mendixmodelsdk";
-import {documentLowerTypeName, documentTypeName, humanReadableDataType, isMicroflow, typeName} from "../../sdk";
 import uuid from "uuid";
+import {humanReadableDataType} from "../sdk/datatypes";
+import {documentLowerTypeName, documentTypeName, isMicroflow, typeName} from "../sdk/documenttypes";
+import {Processor} from "./generatedocumentation";
 import {DefaultMicroflowTemplateData, DefaultTemplateData} from "./defaulttemplatedata";
-import IDocument = projects.IDocument;
-import Microflow = microflows.Microflow;
 import IModule = projects.IModule;
+import MicroflowParameterObject = microflows.MicroflowParameterObject;
 import IFolderBase = projects.IFolderBase;
 import IMicroflow = microflows.IMicroflow;
-import MicroflowParameterObject = microflows.MicroflowParameterObject;
-import {Processor} from "../generatedocumentation";
+import Microflow = microflows.Microflow;
+import IDocument = projects.IDocument;
 
 export class DefaultProcessor implements Processor<DefaultTemplateData> {
     constructor(private moduleFilter?: (module: IModule) => boolean,

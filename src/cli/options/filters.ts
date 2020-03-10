@@ -1,5 +1,5 @@
 import {Argv} from "yargs";
-import {availableDocumentTypes, defaultFilterConfig} from "../../documentation";
+import {availableDocumentTypes, defaultFilterConfig} from "../../documentation/filters";
 
 export interface FilterArguments {
     modules: string;

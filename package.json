@@ -13,7 +13,7 @@
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
     "docs": "node ./docs/generate.js",
-    "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l all",
+    "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l below -s filesystem",
     "prepack": "npm run generate-barrels && tsc",
     "start": "npm run generate-barrels && tsc && node ./dist/cli/cli.js"
   },

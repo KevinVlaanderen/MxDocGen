@@ -1,5 +1,5 @@
 import {Argv} from "yargs";
-import {defaultOutputConfig} from "../../documentation";
+import {defaultOutputConfig} from "../../documentation/output";
 
 export interface OutputArguments {
     outputDirectory: string;

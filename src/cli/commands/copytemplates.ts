@@ -1,9 +1,9 @@
 import os from "os";
-import {Argv} from "yargs";
-import {defaultTemplateConfig} from "../../documentation";
-import {GlobalArguments} from "../cli";
 import fs from "fs-extra";
+import {Argv} from "yargs";
 import path from "path";
+import {GlobalArguments} from "../cli";
+import {defaultTemplateConfig} from "../../documentation/templates";
 
 interface CopyTemplatesCommandArguments extends GlobalArguments {
     target: string;

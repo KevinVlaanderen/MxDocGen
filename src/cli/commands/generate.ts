@@ -1,29 +1,18 @@
-import {Argv} from "yargs";
-import {
-    createDocumentTypeFilter,
-    createGlobDocumentFilter,
-    createRegexModuleFilter,
-    defaultTemplateConfig,
-    generateDocumentation
-} from "../../documentation";
 import {MendixSdkClient} from "mendixplatformsdk";
+import {Argv} from "yargs";
+import {OutputArguments, registerOutputOptions} from "../options/output";
+import {ProjectArguments, registerProjectOptions} from "../options/project";
+import {DefaultProcessor} from "../../documentation/defaultprocessor";
+import {registerTemplateOptions, TemplateArguments} from "../options/templates";
+import {createDocumentTypeFilter, createGlobDocumentFilter, createRegexModuleFilter} from "../../documentation/filters";
 import {GlobalArguments} from "../cli";
-import {
-    ClientArguments,
-    FilterArguments,
-    OutputArguments,
-    ProjectArguments,
-    registerClientOptions,
-    registerFilterOptions,
-    registerOutputOptions,
-    registerProjectOptions,
-    registerTemplateOptions,
-    TemplateArguments
-} from "../options";
-import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk";
-import {DefaultProcessor} from "../../documentation/default";
+import {FilterArguments, registerFilterOptions} from "../options/filters";
+import {defaultTemplateConfig} from "../../documentation/templates";
+import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk/projects";
+import {ClientArguments, registerClientOptions} from "../options/client";
+import {generateDocumentation} from "../../documentation/generatedocumentation";
 
-interface GenerateCommandArguments extends GlobalArguments,ClientArguments, ProjectArguments, FilterArguments, TemplateArguments, OutputArguments {}
+interface GenerateCommandArguments extends GlobalArguments, ClientArguments, ProjectArguments, FilterArguments, TemplateArguments, OutputArguments {}
 
 export const registerGenerateCommand = (yargs: Argv) =>
     yargs

@@ -1,5 +1,6 @@
 import * as fs from "fs";
-import {registerCopyTemplatesCommand, registerGenerateCommand} from "./commands";
+import {registerGenerateCommand} from "./commands/generate";
+import {registerCopyTemplatesCommand} from "./commands/copytemplates";
 
 let yargs = require("yargs");
 

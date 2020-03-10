@@ -1,4 +1,4 @@
-import {TemplateData} from "../generatedocumentation";
+import {TemplateData} from "./generatedocumentation";
 
 export interface DefaultTemplateData extends TemplateData {
     Name: string;
