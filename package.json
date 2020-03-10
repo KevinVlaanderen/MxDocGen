@@ -15,7 +15,18 @@
     "docs": "node ./docs/generate.js",
     "generate-barrels": "barrelsby --delete -d ./src -e __tests__ -l below -s filesystem",
     "prepack": "npm run generate-barrels && tsc",
+    "prettier": "npx prettier --write \"src/**/*.{js,ts,json}\"",
     "start": "npm run generate-barrels && tsc && node ./dist/cli/cli.js"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 4,
+    "useTabs": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --pattern \"src/**/*.{js,ts,json}\" --staged"
+    }
   },
   "dependencies": {
     "@types/when": "^2.4.33",
@@ -37,7 +48,10 @@
     "@types/uuid": "^3.4.7",
     "@types/yargs": "^15.0.3",
     "barrelsby": "^2.2.0",
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1",
     "readme-md-generator": "^1.0.0",
     "rimraf": "^3.0.2",
     "shelljs": "^0.8.3",

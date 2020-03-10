@@ -1,6 +1,6 @@
 import * as fs from "fs";
-import {registerGenerateCommand} from "./commands/generate";
-import {registerCopyTemplatesCommand} from "./commands/copytemplates";
+import { registerGenerateCommand } from "./commands/generate";
+import { registerCopyTemplatesCommand } from "./commands/copytemplates";
 
 let yargs = require("yargs");
 
@@ -10,7 +10,6 @@ yargs = registerGenerateCommand(yargs);
 yargs = registerCopyTemplatesCommand(yargs);
 
 yargs
-    .config("config",  (configPath: string) => JSON.parse(fs.readFileSync(configPath, "utf-8")))
-    .demandCommand(1, "You need at least one command before moving on")
-    .showHelpOnFail(false, "Specify --help for available options")
-    .argv;
+	.config("config", (configPath: string) => JSON.parse(fs.readFileSync(configPath, "utf-8")))
+	.demandCommand(1, "You need at least one command before moving on")
+	.showHelpOnFail(false, "Specify --help for available options").argv;
