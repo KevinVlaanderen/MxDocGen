@@ -15,7 +15,8 @@
     "clean-output": "rimraf out/",
     "docs": "node ./docs/generate.js",
     "prepublish": "tsc",
-    "prettier": "npx prettier --write \"src/**/*.{js,ts,json}\"",
+    "prettier": "prettier --write \"src/**/*.{js,ts,json}\"",
+    "prettier-check": "prettier --check \"src/**/*.{js,ts,json}\"",
     "start": "tsc && node ./dist/cli/cli.js"
   },
   "prettier": {
