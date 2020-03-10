@@ -5,6 +5,5 @@
 export * from "./filters";
 export * from "./generatedocumentation";
 export * from "./output";
-export * from "./templatedata";
 export * from "./templates";
-export * from "./defaulttemplatedata/index";
+export * from "./default/index";

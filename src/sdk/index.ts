@@ -4,5 +4,5 @@
 
 export * from "./client";
 export * from "./datatypes";
-export * from "./documents";
+export * from "./documenttypes";
 export * from "./projects";

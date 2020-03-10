@@ -1,11 +1,11 @@
 import ignore from "ignore";
 import {javaactions, microflows, projects} from "mendixmodelsdk";
-import {lowerTypeName} from "../sdk";
-import IModule = projects.IModule;
-import IDocument = projects.IDocument;
 import IFolderBase = projects.IFolderBase;
 import Microflow = microflows.Microflow;
 import JavaAction = javaactions.JavaAction;
+import IModule = projects.IModule;
+import IDocument = projects.IDocument;
+import Folder = projects.Folder;
 
 export interface FilterConfig {
     modulesRegex: string;
@@ -13,36 +13,46 @@ export interface FilterConfig {
     types: string[]
 }
 
-interface Paths {
-    [name: string]: string;
-}
-
-export const availableDocumentTypes = [Microflow, JavaAction].map(documentType => lowerTypeName(documentType));
+export const availableDocumentTypes = [Microflow, JavaAction];
 
 export const defaultFilterConfig: FilterConfig = {
     modulesRegex: ".*",
     ignorePatterns: ["**"],
-    types: availableDocumentTypes
+    types: availableDocumentTypes.map(documentType =>documentType.structureTypeName.split("$")[1].toLowerCase())
 };
 
-export const createDocumentFilter = (ignorePatterns: string[], paths: Paths): (document: projects.IDocument) => boolean => {
-    const ig = ignore().add(ignorePatterns);
-    return (document: IDocument) => !ig.ignores(paths[document.qualifiedName!]);
-};
-
-export const createModuleFilter = (filter?: RegExp): (module: IModule) => boolean =>
+export const createRegexModuleFilter = (filter?: RegExp): (module: IModule) => boolean =>
     filter ?
         (module: IModule) => module.name.match(filter) !== null :
         () => true;
+export const defaultModuleFilter = createRegexModuleFilter(new RegExp(defaultFilterConfig.modulesRegex));
 
-export const buildDocumentPaths = (folderBase: IFolderBase, path?: string): Paths =>
-    [
-        ...folderBase.documents
-            .map(document => ({
-                [document.qualifiedName!]: path ? [path, document.name].join("/") : document.name
-            })),
-        ...folderBase.folders
-            .map(folder =>
-                buildDocumentPaths(folder, path ? [path, folder.name].join("/") : folder.name))
-    ].reduce((obj, item) =>
-        Object.assign(obj, item), {});
+export const createGlobDocumentFilter = (ignorePatterns: string[]): (document: IDocument) => boolean => {
+    const ig = ignore().add(ignorePatterns);
+    return (document: IDocument) => {
+        const path = buildDocumentPath(document);
+        return !ig.ignores(path);
+    }
+};
+export const defaultDocumentFilter = createGlobDocumentFilter(defaultFilterConfig.ignorePatterns);
+
+export const createDocumentTypeFilter = (types: string[]): (document: IDocument) => boolean => {
+    return (document: IDocument) => types.includes(document.structureTypeName.split("$")[1].toLowerCase());
+};
+export const defaultDocumentTypeFilter = createDocumentTypeFilter(defaultFilterConfig.types);
+
+const buildDocumentPath = (document: IDocument): string => {
+    const documentPath: string[] = [document.name];
+
+    let container = document.containerAsFolderBase;
+    while (isFolder(container)) {
+        documentPath.unshift(container.name);
+        container = container.containerAsFolderBase;
+    }
+
+    return documentPath.join("/");
+};
+
+const isFolder = (folderbase: IFolderBase): folderbase is Folder => {
+    return folderbase.structureTypeName === Folder.structureTypeName;
+};

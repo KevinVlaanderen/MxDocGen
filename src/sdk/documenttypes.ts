@@ -71,6 +71,9 @@ import JsonStructure = jsonstructures.JsonStructure;
 import DomainModel = domainmodels.DomainModel;
 import ModuleDocument = projects.ModuleDocument;
 
+export const documentTypeName = (document: IModuleDocument) => document.structureTypeName.split("$")[1];
+export const documentLowerTypeName = (document: IModuleDocument) => documentTypeName(document).toLowerCase();
+
 export const typeName = (documentType: typeof ModuleDocument) => documentType.structureTypeName.split("$")[1];
 export const lowerTypeName = (documentType: typeof ModuleDocument) => typeName(documentType).toLowerCase();
 

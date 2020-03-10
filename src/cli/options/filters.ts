@@ -15,7 +15,7 @@ export const registerFilterOptions = (yargs: Argv) => yargs
             type: "array",
             requiresArg: true,
             default: defaultFilterConfig.types,
-            choices: availableDocumentTypes
+            choices: availableDocumentTypes.map(value => value.structureTypeName.split("$")[1].toLowerCase())
         }
     })
     .group(["modules", "ignore", "types"], "Filters:");

@@ -1,20 +1,27 @@
 import {Argv} from "yargs";
-import {defaultTemplateConfig, defaultTemplateDataProvider, generateDocumentation} from "../../documentation";
+import {
+    createDocumentTypeFilter,
+    createGlobDocumentFilter,
+    createRegexModuleFilter,
+    defaultTemplateConfig,
+    generateDocumentation
+} from "../../documentation";
 import {MendixSdkClient} from "mendixplatformsdk";
 import {GlobalArguments} from "../cli";
 import {
     ClientArguments,
     FilterArguments,
-    ProjectArguments,
-    TemplateArguments,
     OutputArguments,
+    ProjectArguments,
     registerClientOptions,
     registerFilterOptions,
+    registerOutputOptions,
     registerProjectOptions,
     registerTemplateOptions,
-    registerOutputOptions
+    TemplateArguments
 } from "../options";
 import {MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig} from "../../sdk";
+import {DefaultProcessor} from "../../documentation/default";
 
 interface GenerateCommandArguments extends GlobalArguments,ClientArguments, ProjectArguments, FilterArguments, TemplateArguments, OutputArguments {}
 
@@ -42,7 +49,11 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
     const templateConfig = getTemplateConfig(args);
     const outputConfig = getOutputConfig(args);
 
-    const templateDataProvider = getTemplateDataProvider();
+    const moduleFilter = createRegexModuleFilter(new RegExp(filterConfig.modulesRegex));
+    const documentFilter = createGlobDocumentFilter(filterConfig.ignorePatterns ?? []);
+    const documentTypeFilter = createDocumentTypeFilter(filterConfig.types);
+
+    const processor = new DefaultProcessor(moduleFilter, documentFilter, documentTypeFilter);
 
     if (!projectConfig)
         throw new Error("Invalid project configuration");
@@ -52,7 +63,7 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
         filters: filterConfig,
         templates: templateConfig,
         output: outputConfig,
-        templateData: templateDataProvider
+        processor
     });
 };
 
@@ -83,5 +94,3 @@ const getOutputConfig = (args: GenerateCommandArguments) => ({
     directory: args.outputDirectory,
     filename: args.outputFilename
 });
-
-const getTemplateDataProvider = () => defaultTemplateDataProvider;

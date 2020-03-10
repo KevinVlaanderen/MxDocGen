@@ -1,9 +1,6 @@
 import path from "path";
 import * as fs from "fs";
-import {IAbstractUnit} from "mendixmodelsdk";
 import pkgDir from "pkg-dir";
-
-export type TemplateDataFactory<T extends IAbstractUnit> = (unit: T) => Promise<TemplateData>;
 
 export interface TemplateConfig {
     directory: string;
@@ -14,10 +11,6 @@ export interface TemplateConfig {
 export interface Templates {
     main: string;
     partials: Record<string, string> | ((name: string) => string);
-}
-
-export interface TemplateData {
-    [property: string]: string | boolean | TemplateData | Array<string | TemplateData>;
 }
 
 export const defaultTemplateConfig: TemplateConfig = {
