@@ -13,7 +13,7 @@
     "clean": "npm run clean-generated && npm run clean-output",
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
-    "prepublish": "tsc",
+    "prepare": "tsc",
     "prettier": "prettier --write \"src/**/*.{js,ts,json}\"",
     "prettier-check": "prettier --check \"src/**/*.{js,ts,json}\"",
     "readme": "node docs/readme.js",
