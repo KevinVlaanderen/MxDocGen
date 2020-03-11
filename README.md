@@ -13,7 +13,7 @@
 It uses the Mendix Model SDK to extract information from a Mendix model, which is then fed into a set of templates to generate the required output, such as an .html document.
 Filters can be applied to control which modules and documents should be processed.
 
-MendixModuleDocs can be used as a standalone (node-based) CLI or as a library.
+The tool can be used as a standalone (node-based) CLI or as a library.
 
 ## Install
 
