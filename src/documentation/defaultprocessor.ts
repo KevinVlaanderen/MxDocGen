@@ -31,6 +31,21 @@ export class DefaultProcessor implements Processor<DefaultTemplateData> {
 		};
 	}
 
+	protected *documents(module: IModule): Iterable<IDocument> {
+		for (let document of this.listDocuments(module)) {
+			if (!this.documentFilter || this.documentFilter(document)) {
+				yield document;
+			}
+		}
+	}
+
+	protected listDocuments(folderBase: IFolderBase): Array<IDocument> {
+		return [
+			...folderBase.documents,
+			...folderBase.folders.flatMap(folder => this.listDocuments(folder))
+		];
+	}
+
 	private async processModule(module: IModule) {
 		const documents = Array.from(this.documents(module));
 
@@ -81,20 +96,5 @@ export class DefaultProcessor implements Processor<DefaultTemplateData> {
 				yield module;
 			}
 		}
-	}
-
-	private *documents(module: IModule): Iterable<IDocument> {
-		for (let document of this.listDocuments(module)) {
-			if (!this.documentFilter || this.documentFilter(document)) {
-				yield document;
-			}
-		}
-	}
-
-	private listDocuments(folderBase: IFolderBase): Array<IDocument> {
-		return [
-			...folderBase.documents,
-			...folderBase.folders.flatMap(folder => this.listDocuments(folder))
-		];
 	}
 }
