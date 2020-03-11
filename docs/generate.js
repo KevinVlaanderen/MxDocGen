@@ -17,6 +17,8 @@ async function run() {
     const generateCommandHelpOutput = await getHelpOutput("generate");
     const copyTemplatesCommandHelpOutput = await getHelpOutput("copy-templates");
 
+    shell.mkdir("-p", "./docs/generated");
+    
     shell.ShellString(renderAsMarkdownCode(noCommandHelpOutput))
         .to("./docs/generated/nocommand.md");
     shell.ShellString(renderAsMarkdownCode(generateCommandHelpOutput))
