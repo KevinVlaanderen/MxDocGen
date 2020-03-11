@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to mendixmoduledocs 👋</h1>
+<h1 align="center">Welcome to mxdocgen 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="#" target="_blank">
@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> MendixModuleDocs is a small tool that mimics the documentation generation capabilities offered in Mendix Studio Pro, but with greater flexibility.
+> A small tool that mimics the documentation generation capabilities offered in Mendix Studio Pro, but with greater flexibility.
 
 It uses the Mendix Model SDK to extract information from a Mendix model, which is then fed into a set of templates to generate the required output, such as an .html document.
 Filters can be applied to control which modules and documents should be processed.
