@@ -1,6 +1,6 @@
 {
   "name": "mxdocgen",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A small tool that mimics the documentation generation capabilities offered in Mendix Studio Pro, but with greater flexibility.\n\nIt uses the Mendix Model SDK to extract information from a Mendix model, which is then fed into a set of templates to generate the required output, such as an .html document.\nFilters can be applied to control which modules and documents should be processed.\n\nMendixModuleDocs can be used as a standalone (node-based) CLI or as a library.",
   "keywords": [],
   "author": "Kevin Vlaanderen",
