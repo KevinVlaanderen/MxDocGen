@@ -1,15 +1,11 @@
 import * as fs from "fs";
 import { MendixSdkClient } from "mendixplatformsdk";
-import { IModel } from "mendixmodelsdk";
 import path from "path";
 import { openWorkingCopy, ProjectConfig } from "../sdk/projects";
 import { OutputConfig } from "./output";
 import { render, TemplateConfig, TemplateData } from "./templates";
 import { FilterConfig } from "./filters";
-
-export interface Processor<T extends TemplateData> {
-	process: (model: IModel) => Promise<T>;
-}
+import { Processor } from "./processor";
 
 export interface GenerateDocumentationConfig {
 	output: OutputConfig;
@@ -19,7 +15,7 @@ export interface GenerateDocumentationConfig {
 	processor: Processor<TemplateData>;
 }
 
-export const generateDocumentation = async (
+export const generate = async (
 	client: MendixSdkClient,
 	config: GenerateDocumentationConfig
 ): Promise<void> => {

@@ -5,12 +5,14 @@
 import * as defaultprocessorts from "./defaultprocessor";
 import * as defaulttemplatedatats from "./defaulttemplatedata";
 import * as filtersts from "./filters";
-import * as generatedocumentationts from "./generatedocumentation";
+import * as generatets from "./generate";
 import * as outputts from "./output";
+import * as processorts from "./processor";
 import * as templatests from "./templates";
 export { defaultprocessorts as defaultprocessor };
 export { defaulttemplatedatats as defaulttemplatedata };
 export { filtersts as filters };
-export { generatedocumentationts as generatedocumentation };
+export { generatets as generate };
 export { outputts as output };
+export { processorts as processor };
 export { templatests as templates };

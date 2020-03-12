@@ -13,11 +13,6 @@ export interface TemplateData {
 	[property: string]: string | number | boolean | undefined | TemplateData | Array<TemplateData>;
 }
 
-interface Templates {
-	main: string;
-	partials: Record<string, string> | ((name: string) => string);
-}
-
 export const defaultTemplateConfig: TemplateConfig = {
 	directory: path.join(pkgDir.sync(__dirname)!, "templates"),
 	extension: ".html",
@@ -30,7 +25,7 @@ export const render = (config: TemplateConfig, templateData: TemplateData): stri
 	return Mustache.render(templates.main, templateData, templates.partials);
 };
 
-const loadTemplates = (directory: string, extension: string, main: string): Templates => ({
+const loadTemplates = (directory: string, extension: string, main: string) => ({
 	main: loadTemplate(directory, extension, main),
 	partials: (partialName: string) => loadTemplate(directory, extension, partialName)
 });

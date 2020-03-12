@@ -1,11 +1,11 @@
 #### Without a command
 
-<%- include('../generated/nocommand.md'); -%>
+<%- include('../generated/readme/nocommand.md'); -%>
 
 #### Generate
 
-<%- include('../generated/generatecommand.md'); -%>
+<%- include('../generated/readme/generatecommand.md'); -%>
 
 #### Copy templates
 
-<%- include('../generated/copytemplatescommand.md'); -%>
+<%- include('../generated/readme/copytemplatescommand.md'); -%>

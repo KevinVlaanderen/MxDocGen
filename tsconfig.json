@@ -15,5 +15,14 @@
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+  "typedocOptions": {
+    "mode": "modules",
+    "inputFiles": ["./src"],
+    "out": "docs/generated/typedoc",
+    "exclude": ["**/index.ts", "src/cli/**/*"],
+    "excludeExternals": true,
+    "excludeNotExported": true,
+    "excludePrivate": true
+  }
 }

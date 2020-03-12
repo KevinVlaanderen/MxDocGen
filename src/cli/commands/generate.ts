@@ -13,7 +13,7 @@ import { FilterArguments, filterOptions } from "../options/filters";
 import { defaultTemplateConfig, TemplateConfig } from "../../documentation/templates";
 import { MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig } from "../../sdk/projects";
 import { ClientArguments, clientOptions } from "../options/client";
-import { generateDocumentation } from "../../documentation/generatedocumentation";
+import { generate } from "../../documentation/generate";
 import { OutputConfig } from "../../documentation/output";
 
 interface GenerateCommandArguments
@@ -50,7 +50,7 @@ export const handler = async (args: GenerateCommandArguments) => {
 
 	if (!projectConfig) throw new Error("Invalid project configuration");
 
-	await generateDocumentation(client, {
+	await generate(client, {
 		project: projectConfig,
 		filters: filterConfig,
 		templates: templateConfig,
