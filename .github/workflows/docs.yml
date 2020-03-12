@@ -18,7 +18,7 @@ jobs:
       - name: Generate README
         run: npm run readme
       - name: Generate Typedoc
-          run: npm run typedoc
+        run: npm run typedoc
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
