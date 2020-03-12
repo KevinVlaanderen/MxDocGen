@@ -1,11 +1,25 @@
 <h1 align="center">Welcome to mxdocgen 👋</h1>
+
 <p>
-  <a href="https://www.npmjs.com/package/mxdocgen" target="_blank">
+<a href="https://www.npmjs.com/package/mxdocgen" target="_blank">
     <img alt="Version" src="https://img.shields.io/npm/v/mxdocgen.svg">
-  </a>
-  <a href="#" target="_blank">
-    <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
-  </a>
+</a>
+
+
+
+<a href="https://github.com/KevinVlaanderen/MxDocGen#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg"/>
+</a>
+
+<a href="https://github.com/KevinVlaanderen/MxDocGen/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg"/>
+</a>
+
+<a href="https://github.com/KevinVlaanderen/MxDocGen/blob/master/LICENSE" target="_blank">
+    <img alt="License: ISC"
+         src="https://img.shields.io/github/license/KevinVlaanderen/mxdocgen"/>
+</a>
+
 </p>
 
 > A small tool that mimics the documentation generation capabilities offered in Mendix Studio Pro, but with greater flexibility.
@@ -15,6 +29,10 @@ Filters can be applied to control which modules and documents should be processe
 
 The tool can be used as a standalone (node-based) CLI or as a library.
 
+### 🏠 [Homepage](https://github.com/KevinVlaanderen/MxDocGen#readme)
+
+
+
 ## Install
 
 ```sh
@@ -23,18 +41,25 @@ npm install
 
 ## Usage
 
+### Library
+
+[API docs](https://kevinvlaanderen.github.io/MxDocGen/)
+
+### CLI
+
 ```sh
-npx mendixmoduledocs
+npx mxdocgen
 ```
 
-### During development
+or, during development
+
 ```sh
 npm run start
 ```
 
-### Command line parameters
+#### Command line parameters
 
-#### Without a command
+##### Without a command
 
 ```
 cli.js <command>
@@ -50,7 +75,7 @@ Options:
   --config   Path to JSON config file
 ```
 
-#### Generate
+##### Generate
 
 ```
 cli.js generate
@@ -87,7 +112,7 @@ Options:
   --config   Path to JSON config file
 ```
 
-#### Copy templates
+##### Copy templates
 
 ```
 cli.js copy-templates <target>
@@ -104,12 +129,29 @@ Options:
 
 ## Author
 
+
 👤 **Kevin Vlaanderen**
 
+
+
+
+* Github: [@KevinVlaanderen](https://github.com/KevinVlaanderen)
+
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+<br/>Feel free to check [issues page](https://github.com/KevinVlaanderen/MxDocGen/issues).
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
+
+
+## 📝 License
+
+    Copyright © 2020 [Kevin Vlaanderen](https://github.com/KevinVlaanderen).<br/>
+This project is [ISC](https://github.com/KevinVlaanderen/MxDocGen/blob/master/LICENSE) licensed.
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

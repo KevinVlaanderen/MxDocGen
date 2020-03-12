@@ -2,9 +2,17 @@
   "name": "mxdocgen",
   "version": "0.3.0",
   "description": "A small tool that mimics the documentation generation capabilities offered in Mendix Studio Pro, but with greater flexibility.\n\nIt uses the Mendix Model SDK to extract information from a Mendix model, which is then fed into a set of templates to generate the required output, such as an .html document.\nFilters can be applied to control which modules and documents should be processed.\n\nThe tool can be used as a standalone (node-based) CLI or as a library.",
-  "keywords": [],
+  "keywords": ["Mendix", "documentation", "mpk"],
   "author": "Kevin Vlaanderen",
   "license": "ISC",
+  "homepage": "https://github.com/KevinVlaanderen/MxDocGen#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KevinVlaanderen/MxDocGen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KevinVlaanderen/MxDocGen/issues"
+  },
   "main": "dist/index.js",
   "bin": "dist/cli/cli.js",
   "types": "dist/index.d.ts",

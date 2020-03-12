@@ -27,7 +27,7 @@ async function run() {
         .to(path.join(__dirname, "generated/readme/copytemplatescommand.md"));
 
     shell.rm("README.md");
-    shell.exec("npx readme -y -p build/templates/default.md");
+    shell.exec("npx readme -y -p build/templates/default.md.ejs");
 }
 
 run().then(r => console.log("Done."));
