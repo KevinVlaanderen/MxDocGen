@@ -10,15 +10,15 @@ import * as optionsfiltersts from "./options/filters";
 import * as optionsoutputts from "./options/output";
 import * as optionsprojectts from "./options/project";
 import * as optionstemplatests from "./options/templates";
-export { clits as cli };
+export {clits as cli};
 export const commands = {
-	copytemplates: commandscopytemplatests,
-	generate: commandsgeneratets
+  copytemplates: commandscopytemplatests,
+  generate: commandsgeneratets,
 };
 export const options = {
-	client: optionsclientts,
-	filters: optionsfiltersts,
-	output: optionsoutputts,
-	project: optionsprojectts,
-	templates: optionstemplatests
+  client: optionsclientts,
+  filters: optionsfiltersts,
+  output: optionsoutputts,
+  project: optionsprojectts,
+  templates: optionstemplatests,
 };

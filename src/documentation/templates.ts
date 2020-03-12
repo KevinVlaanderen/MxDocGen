@@ -5,7 +5,7 @@ import pkgDir from "pkg-dir";
 export interface TemplateConfig {
 	directory: string;
 	extension: string;
-	main: string;
+	mainTemplate: string;
 }
 
 export interface Templates {
@@ -16,7 +16,7 @@ export interface Templates {
 export const defaultTemplateConfig: TemplateConfig = {
 	directory: path.join(pkgDir.sync(__dirname)!, "templates"),
 	extension: ".html",
-	main: "Main"
+	mainTemplate: "Main"
 };
 
 export const loadTemplates = (directory: string, extension: string, main: string): Templates => ({

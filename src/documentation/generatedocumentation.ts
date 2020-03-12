@@ -36,7 +36,7 @@ export const generateDocumentation = async (
 	const templates = loadTemplates(
 		templateConfig.directory,
 		templateConfig.extension,
-		templateConfig.main
+		templateConfig.mainTemplate
 	);
 
 	const templateData = await config.processor.process(model);

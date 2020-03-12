@@ -1,15 +1,8 @@
 import * as fs from "fs";
-import { registerGenerateCommand } from "./commands/generate";
-import { registerCopyTemplatesCommand } from "./commands/copytemplates";
-
-let yargs = require("yargs");
-
-export interface GlobalArguments {}
-
-yargs = registerGenerateCommand(yargs);
-yargs = registerCopyTemplatesCommand(yargs);
+import yargs from "yargs";
 
 yargs
-	.config("config", (configPath: string) => JSON.parse(fs.readFileSync(configPath, "utf-8")))
+	.commandDir("commands")
 	.demandCommand(1, "You need at least one command before moving on")
+	.config("config", (configPath: string) => JSON.parse(fs.readFileSync(configPath, "utf-8")))
 	.showHelpOnFail(false, "Specify --help for available options").argv;

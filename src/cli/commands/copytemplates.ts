@@ -1,29 +1,24 @@
 import os from "os";
 import fs from "fs-extra";
-import { Argv } from "yargs";
 import path from "path";
-import { GlobalArguments } from "../cli";
 import { defaultTemplateConfig } from "../../documentation/templates";
+import { Arguments, CommandBuilder } from "yargs";
 
-interface CopyTemplatesCommandArguments extends GlobalArguments {
+interface CopyTemplatesCommandArguments extends Arguments {
 	target: string;
 }
 
-export const registerCopyTemplatesCommand = (yargs: Argv) =>
-	yargs.command(
-		"copy-templates <target>",
-		"Copy the default templates to another location for modification",
-		copyTemplatesCommandBuilder,
-		copyTemplatesCommandHandler
-	);
+export const command = "copy-templates <target>";
+export const describe = "Copy the default templates to another location for modification";
 
-const copyTemplatesCommandBuilder = (yargs: Argv) =>
-	yargs.positional("target", {
+export const builder: CommandBuilder = {
+	target: {
 		describe: "Target directory for the templates",
 		type: "string"
-	}).argv;
+	}
+};
 
-const copyTemplatesCommandHandler = async (args: CopyTemplatesCommandArguments) => {
+export const handler = (args: CopyTemplatesCommandArguments) => {
 	const targetDirectory = args.target.startsWith("~/")
 		? path.join(os.homedir(), args.target.slice(2))
 		: args.target;

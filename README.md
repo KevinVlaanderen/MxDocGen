@@ -40,9 +40,9 @@ npm run start
 cli.js <command>
 
 Commands:
-  cli.js generate                 Generate documentation
   cli.js copy-templates <target>  Copy the default templates to another location
                                   for modification
+  cli.js generate                 Generate documentation
 
 Options:
   --help     Show help                                                 [boolean]
@@ -53,29 +53,33 @@ Options:
 #### Generate
 
 ```
-Credentials:
+cli.js generate
+
+Generate documentation
+
+Credentials
   --username                                                 [string] [required]
   --apikey                                                   [string] [required]
 
-Project:
+Filters
+  --modules                                             [string] [default: ".*"]
+  --ignore                                             [array] [default: ["**"]]
+
+Output
+  --outputdir                               [string] [required] [default: "out"]
+  --outputfile                       [string] [required] [default: "index.html"]
+
+Project
   --mpk                                                                 [string]
   --projectid                                                           [string]
   --revision                                                            [number]
   --branch                                                              [string]
   --workingcopyid                                                       [string]
 
-Filters:
-  --modules                                             [string] [default: ".*"]
-  --ignore                                             [array] [default: ["**"]]
-
-Templates:
+Templates
   --templatedir                                                         [string]
   --templateext                                                         [string]
-  --templatemain                                                        [string]
-
-Output:
-  --outputDirectory                         [string] [required] [default: "out"]
-  --outputFilename                   [string] [required] [default: "index.html"]
+  --maintemplate                                                        [string]
 
 Options:
   --help     Show help                                                 [boolean]
@@ -86,13 +90,15 @@ Options:
 #### Copy templates
 
 ```
-Positionals:
-  target  Target directory for the templates                 [string] [required]
+cli.js copy-templates <target>
+
+Copy the default templates to another location for modification
 
 Options:
   --help     Show help                                                 [boolean]
   --version  Show version number                                       [boolean]
   --config   Path to JSON config file
+  --target   Target directory for the templates                         [string]
 ```
 
 

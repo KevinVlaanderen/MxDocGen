@@ -1,44 +1,41 @@
 import { MendixSdkClient } from "mendixplatformsdk";
-import { Argv } from "yargs";
-import { OutputArguments, registerOutputOptions } from "../options/output";
-import { ProjectArguments, registerProjectOptions } from "../options/project";
+import { Arguments, CommandBuilder } from "yargs";
+import { OutputArguments, outputOptions } from "../options/output";
+import { ProjectArguments, projectOptions } from "../options/project";
 import { DefaultProcessor } from "../../documentation/defaultprocessor";
-import { registerTemplateOptions, TemplateArguments } from "../options/templates";
-import { createGlobDocumentFilter, createRegexModuleFilter } from "../../documentation/filters";
-import { GlobalArguments } from "../cli";
-import { FilterArguments, registerFilterOptions } from "../options/filters";
-import { defaultTemplateConfig } from "../../documentation/templates";
+import { TemplateArguments, templateOptions } from "../options/templates";
+import {
+	createGlobDocumentFilter,
+	createRegexModuleFilter,
+	FilterConfig
+} from "../../documentation/filters";
+import { FilterArguments, filterOptions } from "../options/filters";
+import { defaultTemplateConfig, TemplateConfig } from "../../documentation/templates";
 import { MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig } from "../../sdk/projects";
-import { ClientArguments, registerClientOptions } from "../options/client";
+import { ClientArguments, clientOptions } from "../options/client";
 import { generateDocumentation } from "../../documentation/generatedocumentation";
+import { OutputConfig } from "../../documentation/output";
 
 interface GenerateCommandArguments
-	extends GlobalArguments,
+	extends Arguments,
 		ClientArguments,
 		ProjectArguments,
 		FilterArguments,
 		TemplateArguments,
 		OutputArguments {}
 
-export const registerGenerateCommand = (yargs: Argv) =>
-	yargs.command(
-		"generate",
-		"Generate documentation",
-		generateCommandBuilder,
-		generateCommandHandler
-	);
+export const command = "generate";
+export const describe = "Generate documentation";
 
-const generateCommandBuilder = (yargs: Argv) => {
-	yargs = registerClientOptions(yargs);
-	yargs = registerProjectOptions(yargs);
-	yargs = registerFilterOptions(yargs);
-	yargs = registerTemplateOptions(yargs);
-	yargs = registerOutputOptions(yargs);
-
-	return yargs.argv;
+export const builder: CommandBuilder = {
+	...clientOptions,
+	...filterOptions,
+	...outputOptions,
+	...projectOptions,
+	...templateOptions
 };
 
-const generateCommandHandler = async (args: GenerateCommandArguments) => {
+export const handler = async (args: GenerateCommandArguments) => {
 	const client = new MendixSdkClient(args.username, args.apikey);
 
 	const projectConfig = getProjectConfig(args);
@@ -62,9 +59,9 @@ const generateCommandHandler = async (args: GenerateCommandArguments) => {
 	});
 };
 
-const getProjectConfig = (
+const getProjectConfig: (
 	args: GenerateCommandArguments
-): MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined =>
+) => MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig | undefined = args =>
 	args.mpk
 		? {
 				mpk: args.mpk
@@ -81,18 +78,18 @@ const getProjectConfig = (
 		  }
 		: undefined;
 
-const getFilterConfig = (args: GenerateCommandArguments) => ({
+const getFilterConfig: (args: GenerateCommandArguments) => FilterConfig = args => ({
 	modulesRegex: args.modules,
 	documentIgnorePatterns: args.ignore
 });
 
-const getTemplateConfig = (args: GenerateCommandArguments) => ({
-	directory: args.templateDirectory ?? defaultTemplateConfig.directory,
-	extension: args.templateExtension ?? defaultTemplateConfig.extension,
-	main: args.templateMain ?? defaultTemplateConfig.main
+const getTemplateConfig: (args: GenerateCommandArguments) => TemplateConfig = args => ({
+	directory: args.templatedir ?? defaultTemplateConfig.directory,
+	extension: args.templateext ?? defaultTemplateConfig.extension,
+	mainTemplate: args.maintemplate ?? defaultTemplateConfig.mainTemplate
 });
 
-const getOutputConfig = (args: GenerateCommandArguments) => ({
-	directory: args.outputDirectory,
-	filename: args.outputFilename
+const getOutputConfig: (args: GenerateCommandArguments) => OutputConfig = args => ({
+	directory: args.outputdir,
+	filename: args.outputfile
 });

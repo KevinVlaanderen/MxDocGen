@@ -5,6 +5,6 @@
 import * as datatypests from "./datatypes";
 import * as documenttypests from "./documenttypes";
 import * as projectsts from "./projects";
-export { datatypests as datatypes };
-export { documenttypests as documenttypes };
-export { projectsts as projects };
+export {datatypests as datatypes};
+export {documenttypests as documenttypes};
+export {projectsts as projects};

@@ -1,30 +1,43 @@
-import { Argv } from "yargs";
+import { Options } from "yargs";
 
 export interface ProjectArguments {
-	mpk?: string;
-	projectid?: string;
-	revision?: number;
-	branch?: string;
-	workingcopyid?: string;
+	mpk: string;
+	projectid: string;
+	revision: number;
+	branch: string;
+	workingcopyid: string;
 }
 
-export const registerProjectOptions = (yargs: Argv) =>
-	yargs
-		.options({
-			mpk: { type: "string", requiresArg: true },
-			projectid: { type: "string", requiresArg: true },
-			revision: { type: "number", requiresArg: true },
-			branch: { type: "string", requiresArg: true },
-			workingcopyid: { type: "string", requiresArg: true }
-		})
-		.conflicts({
-			mpk: ["projectid", "workingcopyid"],
-			projectid: ["mpk", "workingcopyid"],
-			workingcopyid: ["mpk", "projectid"]
-		})
-		.implies({
-			projectid: ["revision", "branch"],
-			revision: "projectid",
-			branch: "projectid"
-		})
-		.group(["mpk", "projectid", "revision", "branch", "workingcopyid"], "Project:");
+export const projectOptions: { [key in keyof ProjectArguments]: Options } = {
+	mpk: {
+		type: "string",
+		requiresArg: true,
+		group: "Project",
+		conflicts: ["projectid", "workingcopyid"]
+	},
+	projectid: {
+		type: "string",
+		requiresArg: true,
+		group: "Project",
+		implies: ["revision", "branch"],
+		conflicts: ["mpk", "workingcopyid"]
+	},
+	revision: {
+		type: "number",
+		requiresArg: true,
+		group: "Project",
+		implies: "projectid"
+	},
+	branch: {
+		type: "string",
+		requiresArg: true,
+		group: "Project",
+		implies: "projectid"
+	},
+	workingcopyid: {
+		type: "string",
+		requiresArg: true,
+		group: "Project",
+		conflicts: ["mpk", "projectid"]
+	}
+};

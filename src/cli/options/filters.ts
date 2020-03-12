@@ -1,4 +1,4 @@
-import { Argv } from "yargs";
+import { Options } from "yargs";
 import { defaultFilterConfig } from "../../documentation/filters";
 
 export interface FilterArguments {
@@ -6,18 +6,17 @@ export interface FilterArguments {
 	ignore: string[];
 }
 
-export const registerFilterOptions = (yargs: Argv) =>
-	yargs
-		.options({
-			modules: {
-				type: "string",
-				requiresArg: true,
-				default: defaultFilterConfig.modulesRegex
-			},
-			ignore: {
-				type: "array",
-				requiresArg: true,
-				default: defaultFilterConfig.documentIgnorePatterns
-			}
-		})
-		.group(["modules", "ignore"], "Filters:");
+export const filterOptions: { [key in keyof FilterArguments]: Options } = {
+	modules: {
+		type: "string",
+		requiresArg: true,
+		default: defaultFilterConfig.modulesRegex,
+		group: "Filters"
+	},
+	ignore: {
+		type: "array",
+		requiresArg: true,
+		default: defaultFilterConfig.documentIgnorePatterns,
+		group: "Filters"
+	}
+};
