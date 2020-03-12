@@ -82,26 +82,26 @@ mxdocgen generate
 
 Generate documentation
 
-Credentials
+Credentials:
   --username                                                 [string] [required]
   --apikey                                                   [string] [required]
 
-Filters
+Filters:
   --modules                                             [string] [default: ".*"]
   --ignore                                             [array] [default: ["**"]]
 
-Output
+Output:
   --outputdir                               [string] [required] [default: "out"]
   --outputfile                       [string] [required] [default: "index.html"]
 
-Project
+Project:
   --mpk                                                                 [string]
   --projectid                                                           [string]
   --revision                                                            [number]
   --branch                                                              [string]
   --workingcopyid                                                       [string]
 
-Templates
+Templates:
   --templatedir                                                         [string]
   --templateext                                                         [string]
   --maintemplate                                                        [string]
