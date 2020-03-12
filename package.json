@@ -9,15 +9,20 @@
   "bin": "dist/cli/cli.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "barrels": "barrelsby --delete -d ./src -e __tests__ -l below -s filesystem",
     "clean": "npm run clean-generated && npm run clean-output",
+    "docs": "npm run readme && npm run typedoc",
+    "prepare": "npm run clean-generated && tsc",
+    "start": "tsc && node ./dist/cli/cli.js",
+
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
-    "prepare": "npm run clean-generated && tsc",
-    "prettier": "prettier --write \"src/**/*.{js,ts,json}\"",
-    "prettier-check": "prettier --check \"src/**/*.{js,ts,json}\"",
+
     "readme": "node docs/readme.js",
-    "start": "tsc && node ./dist/cli/cli.js"
+    "typedoc": "typedoc",
+
+    "barrels": "barrelsby --delete -d ./src -e __tests__ -l below -s filesystem",
+    "prettier": "pretty-quick --verbose --write **/*.*",
+    "prettier-check": "pretty-quick --verbose --check **/*.*"
   },
   "prettier": {
     "printWidth": 100,
@@ -26,7 +31,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --pattern \"src/**/*.{js,ts,json}\" --staged"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "dependencies": {
