@@ -1,20 +1,20 @@
 import { MendixSdkClient } from "mendixplatformsdk";
 import { Arguments, CommandBuilder } from "yargs";
 import { OutputArguments, outputOptions } from "../options/output";
-import { ProjectArguments, projectOptions } from "../options/project";
+import { ClientArguments, clientOptions } from "../options/client";
 import { DefaultProcessor } from "../../documentation/defaultprocessor";
-import { TemplateArguments, templateOptions } from "../options/templates";
+import { defaultTemplateConfig, TemplateConfig } from "../../documentation/templates";
 import {
 	createGlobDocumentFilter,
 	createRegexModuleFilter,
 	FilterConfig
 } from "../../documentation/filters";
-import { FilterArguments, filterOptions } from "../options/filters";
-import { defaultTemplateConfig, TemplateConfig } from "../../documentation/templates";
 import { MpkProjectConfig, SvnProjectConfig, WorkingCopyProjectConfig } from "../../sdk/projects";
-import { ClientArguments, clientOptions } from "../options/client";
-import { generate } from "../../documentation/generate";
+import { TemplateArguments, templateOptions } from "../options/templates";
 import { OutputConfig } from "../../documentation/output";
+import { ProjectArguments, projectOptions } from "../options/project";
+import { FilterArguments, filterOptions } from "../options/filters";
+import { generate } from "../../documentation/generate";
 
 interface GenerateCommandArguments
 	extends Arguments,

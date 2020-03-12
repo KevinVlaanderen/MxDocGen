@@ -7,8 +7,8 @@ import {
 	isMicroflow,
 	typeName
 } from "../sdk/documenttypes";
-import { DefaultMicroflowTemplateData, DefaultTemplateData } from "./defaulttemplatedata";
 import { Processor } from "./processor";
+import { DefaultMicroflowTemplateData, DefaultTemplateData } from "./defaulttemplatedata";
 import IModule = projects.IModule;
 import MicroflowParameterObject = microflows.MicroflowParameterObject;
 import IFolderBase = projects.IFolderBase;

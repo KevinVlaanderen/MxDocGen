@@ -1,17 +1,22 @@
 import * as fs from "fs";
 import { MendixSdkClient } from "mendixplatformsdk";
 import path from "path";
-import { openWorkingCopy, ProjectConfig } from "../sdk/projects";
 import { OutputConfig } from "./output";
-import { render, TemplateConfig, TemplateData } from "./templates";
-import { FilterConfig } from "./filters";
 import { Processor } from "./processor";
+import { render, TemplateConfig, TemplateData } from "./templates";
+import {
+	MpkProjectConfig,
+	openWorkingCopy,
+	SvnProjectConfig,
+	WorkingCopyProjectConfig
+} from "../sdk/projects";
+import { FilterConfig } from "./filters";
 
 export interface GenerateDocumentationConfig {
 	output: OutputConfig;
 	filters: FilterConfig;
 	templates: TemplateConfig;
-	project: ProjectConfig;
+	project: MpkProjectConfig | SvnProjectConfig | WorkingCopyProjectConfig;
 	processor: Processor<TemplateData>;
 }
 

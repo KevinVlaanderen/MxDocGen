@@ -29,7 +29,7 @@
     "clean-output": "rimraf out/",
     "readme": "node build/readme.js",
     "typedoc": "typedoc",
-    "barrels": "barrelsby --delete -d src -e __tests__ -l below -s filesystem",
+    "barrels": "barrelsby --delete -d src -e __tests__ -l top -s filesystem",
     "prettier": "pretty-quick --verbose --write **/*.*",
     "prettier-check": "pretty-quick --verbose --check **/*.*"
   },

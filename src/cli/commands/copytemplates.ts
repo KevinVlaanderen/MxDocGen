@@ -1,8 +1,8 @@
 import os from "os";
 import fs from "fs-extra";
 import path from "path";
-import { defaultTemplateConfig } from "../../documentation/templates";
 import { Arguments, CommandBuilder } from "yargs";
+import { defaultTemplateConfig } from "../../documentation/templates";
 
 interface CopyTemplatesCommandArguments extends Arguments {
 	target: string;
