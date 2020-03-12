@@ -12,13 +12,13 @@ export const outputOptions: { [key in keyof OutputArguments]: Options } = {
 		requiresArg: true,
 		demandOption: true,
 		default: defaultOutputConfig.directory,
-		group: "Output"
+		group: "Output:"
 	},
 	outputfile: {
 		type: "string",
 		requiresArg: true,
 		demandOption: true,
 		default: defaultOutputConfig.filename,
-		group: "Output"
+		group: "Output:"
 	}
 };

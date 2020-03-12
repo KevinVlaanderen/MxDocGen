@@ -10,12 +10,12 @@ export const clientOptions: { [key in keyof ClientArguments]: Options } = {
 		type: "string",
 		demandOption: true,
 		requiresArg: true,
-		group: "Credentials"
+		group: "Credentials:"
 	},
 	apikey: {
 		type: "string",
 		demandOption: true,
 		requiresArg: true,
-		group: "Credentials"
+		group: "Credentials:"
 	}
 };

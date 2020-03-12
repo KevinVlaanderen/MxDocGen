@@ -10,19 +10,19 @@ export const templateOptions: { [key in keyof TemplateArguments]: Options } = {
 	templatedir: {
 		type: "string",
 		requiresArg: true,
-		group: "Templates",
+		group: "Templates:",
 		implies: ["templateext", "templatemain"]
 	},
 	templateext: {
 		type: "string",
 		requiresArg: true,
-		group: "Templates",
+		group: "Templates:",
 		implies: ["templatedir", "templatemain"]
 	},
 	maintemplate: {
 		type: "string",
 		requiresArg: true,
-		group: "Templates",
+		group: "Templates:",
 		implies: ["templatedir", "templateext"]
 	}
 };
