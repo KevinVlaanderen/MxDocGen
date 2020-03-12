@@ -113,5 +113,5 @@ dist
 # Application-specific
 /config.json
 /out
-/docs/generated
+/build/generated
 /package

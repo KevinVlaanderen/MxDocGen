@@ -17,17 +17,17 @@ async function run() {
     const generateCommandHelpOutput = await getHelpOutput("generate");
     const copyTemplatesCommandHelpOutput = await getHelpOutput("copy-templates");
 
-    shell.mkdir("-p", "./docs/generated/readme");
+    shell.mkdir("-p", path.join(__dirname, "generated/readme"));
 
     shell.ShellString(renderAsMarkdownCode(noCommandHelpOutput))
-        .to("./docs/generated/readme/nocommand.md");
+        .to(path.join(__dirname, "generated/readme/nocommand.md"));
     shell.ShellString(renderAsMarkdownCode(generateCommandHelpOutput))
-        .to("./docs/generated/readme/generatecommand.md");
+        .to(path.join(__dirname, "generated/readme/generatecommand.md"));
     shell.ShellString(renderAsMarkdownCode(copyTemplatesCommandHelpOutput))
-        .to("./docs/generated/readme/copytemplatescommand.md");
+        .to(path.join(__dirname, "generated/readme/copytemplatescommand.md"));
 
     shell.rm("README.md");
-    shell.exec("npx readme -y -p ./docs/templates/default.md");
+    shell.exec("npx readme -y -p build/templates/default.md");
 }
 
 run().then(r => console.log("Done."));

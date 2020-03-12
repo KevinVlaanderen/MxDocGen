@@ -12,15 +12,15 @@
     "clean": "npm run clean-generated && npm run clean-output",
     "docs": "npm run readme && npm run typedoc",
     "prepare": "npm run clean-generated && tsc",
-    "start": "tsc && node ./dist/cli/cli.js",
+    "start": "tsc && node dist/cli/cli.js",
 
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
 
-    "readme": "node docs/readme.js",
+    "readme": "node build/readme.js",
     "typedoc": "typedoc",
 
-    "barrels": "barrelsby --delete -d ./src -e __tests__ -l below -s filesystem",
+    "barrels": "barrelsby --delete -d src -e __tests__ -l below -s filesystem",
     "prettier": "pretty-quick --verbose --write **/*.*",
     "prettier-check": "pretty-quick --verbose --check **/*.*"
   },

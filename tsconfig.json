@@ -18,8 +18,8 @@
   ],
   "typedocOptions": {
     "mode": "modules",
-    "inputFiles": ["./src"],
-    "out": "docs/generated/typedoc",
+    "inputFiles": ["src"],
+    "out": "docs",
     "exclude": ["**/index.ts", "src/cli/**/*"],
     "excludeExternals": true,
     "excludeNotExported": true,
