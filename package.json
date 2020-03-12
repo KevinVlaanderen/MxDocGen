@@ -28,7 +28,7 @@
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
     "readme": "node build/readme.js",
-    "typedoc": "typedoc",
+    "typedoc": "typedoc && touch docs/.nojekyll",
     "barrels": "barrelsby --delete -d src -e __tests__ -l top -s filesystem",
     "prettier": "pretty-quick --verbose --write **/*.*",
     "prettier-check": "pretty-quick --verbose --check **/*.*"
