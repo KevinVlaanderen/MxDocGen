@@ -1,8 +1,12 @@
 {
   "name": "mxdocgen",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "A small tool that mimics the documentation generation capabilities offered in Mendix Studio Pro, but with greater flexibility.\n\nIt uses the Mendix Model SDK to extract information from a Mendix model, which is then fed into a set of templates to generate the required output, such as an .html document.\nFilters can be applied to control which modules and documents should be processed.\n\nThe tool can be used as a standalone (node-based) CLI or as a library.",
-  "keywords": ["Mendix", "documentation", "mpk"],
+  "keywords": [
+    "Mendix",
+    "documentation",
+    "mpk"
+  ],
   "author": "Kevin Vlaanderen",
   "license": "ISC",
   "homepage": "https://github.com/KevinVlaanderen/MxDocGen#readme",
@@ -21,13 +25,10 @@
     "docs": "npm run readme && npm run typedoc",
     "prepare": "npm run clean-generated && tsc",
     "start": "tsc && node dist/cli/cli.js",
-
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
-
     "readme": "node build/readme.js",
     "typedoc": "typedoc",
-
     "barrels": "barrelsby --delete -d src -e __tests__ -l below -s filesystem",
     "prettier": "pretty-quick --verbose --write **/*.*",
     "prettier-check": "pretty-quick --verbose --check **/*.*"
