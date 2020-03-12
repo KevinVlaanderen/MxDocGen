@@ -1,6 +1,7 @@
 import path from "path";
 import * as fs from "fs";
 import pkgDir from "pkg-dir";
+import Mustache from "mustache";
 
 export interface TemplateConfig {
 	directory: string;
@@ -8,7 +9,11 @@ export interface TemplateConfig {
 	mainTemplate: string;
 }
 
-export interface Templates {
+export interface TemplateData {
+	[property: string]: string | number | boolean | undefined | TemplateData | Array<TemplateData>;
+}
+
+interface Templates {
 	main: string;
 	partials: Record<string, string> | ((name: string) => string);
 }
@@ -19,13 +24,19 @@ export const defaultTemplateConfig: TemplateConfig = {
 	mainTemplate: "Main"
 };
 
-export const loadTemplates = (directory: string, extension: string, main: string): Templates => ({
+export const render = (config: TemplateConfig, templateData: TemplateData): string => {
+	const templates = loadTemplates(config.directory, config.extension, config.mainTemplate);
+
+	return Mustache.render(templates.main, templateData, templates.partials);
+};
+
+const loadTemplates = (directory: string, extension: string, main: string): Templates => ({
 	main: loadTemplate(directory, extension, main),
 	partials: (partialName: string) => loadTemplate(directory, extension, partialName)
 });
 
 const loadTemplate = (directory: string, extension: string, name: string): string => {
-	let cleanExtension = extension.match(/^[\.\\/]*(.*)$/)![1];
+	const cleanExtension = extension.match(/^[.\\/]*(.*)$/)![1];
 	return fs.readFileSync(path.join(directory, `${name}.${cleanExtension}`), {
 		encoding: "utf8"
 	});

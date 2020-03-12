@@ -1,16 +1,11 @@
 import * as fs from "fs";
 import { MendixSdkClient } from "mendixplatformsdk";
 import { IModel } from "mendixmodelsdk";
-import Mustache from "mustache";
 import path from "path";
 import { openWorkingCopy, ProjectConfig } from "../sdk/projects";
 import { OutputConfig } from "./output";
-import { loadTemplates, TemplateConfig } from "./templates";
+import { render, TemplateConfig, TemplateData } from "./templates";
 import { FilterConfig } from "./filters";
-
-export interface TemplateData {
-	[property: string]: string | number | boolean | undefined | TemplateData | Array<TemplateData>;
-}
 
 export interface Processor<T extends TemplateData> {
 	process: (model: IModel) => Promise<T>;
@@ -32,17 +27,11 @@ export const generateDocumentation = async (
 	const workingCopyConfig = config.project;
 
 	const model = await openWorkingCopy(client, workingCopyConfig);
-
-	const templates = loadTemplates(
-		templateConfig.directory,
-		templateConfig.extension,
-		templateConfig.mainTemplate
-	);
-
 	const templateData = await config.processor.process(model);
-	const rendered = Mustache.render(templates.main, templateData, templates.partials);
+
+	const output = render(templateConfig, templateData);
 
 	if (!fs.existsSync(config.output.directory)) fs.mkdirSync(config.output.directory);
 
-	fs.writeFileSync(path.join(config.output.directory, config.output.filename), rendered);
+	fs.writeFileSync(path.join(config.output.directory, config.output.filename), output);
 };
