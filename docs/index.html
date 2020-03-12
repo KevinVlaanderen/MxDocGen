@@ -108,12 +108,12 @@
 				<a href="#without-a-command" id="without-a-command" style="color: inherit; text-decoration: none;">
 					<h5>Without a command</h5>
 				</a>
-				<pre><code>cli.js &lt;command&gt;
+				<pre><code>mxdocgen &lt;command&gt;
 
 Commands:
-  cli.js copy-templates &lt;target&gt;  Copy the<span class="hljs-built_in"> default </span>templates <span class="hljs-keyword">to</span> another location
+  mxdocgen copy-templates &lt;target&gt;  Copy the<span class="hljs-built_in"> default </span>templates <span class="hljs-keyword">to</span> another location
                                   <span class="hljs-keyword">for</span> modification
-  cli.js generate                 Generate documentation
+  mxdocgen generate                 Generate documentation
 
 Options:
   --help     Show help                                                 [boolean]
@@ -122,42 +122,42 @@ Options:
 				<a href="#generate" id="generate" style="color: inherit; text-decoration: none;">
 					<h5>Generate</h5>
 				</a>
-				<pre><code><span class="hljs-selector-tag">cli</span><span class="hljs-selector-class">.js</span> <span class="hljs-selector-tag">generate</span>
+				<pre><code>mxdocgen generate
 
-<span class="hljs-selector-tag">Generate</span> <span class="hljs-selector-tag">documentation</span>
+<span class="hljs-symbol">Generate</span> documentation
 
-<span class="hljs-selector-tag">Credentials</span>
-  <span class="hljs-selector-tag">--username</span>                                                 <span class="hljs-selector-attr">[string]</span> <span class="hljs-selector-attr">[required]</span>
-  <span class="hljs-selector-tag">--apikey</span>                                                   <span class="hljs-selector-attr">[string]</span> <span class="hljs-selector-attr">[required]</span>
+<span class="hljs-symbol">Credentials</span>
+  --username                                                 [string] [required]
+  --apikey                                                   [string] [required]
 
-<span class="hljs-selector-tag">Filters</span>
-  <span class="hljs-selector-tag">--modules</span>                                             <span class="hljs-selector-attr">[string]</span> <span class="hljs-selector-attr">[default: <span class="hljs-string">".*"</span>]</span>
-  <span class="hljs-selector-tag">--ignore</span>                                             <span class="hljs-selector-attr">[array]</span> <span class="hljs-selector-attr">[default: [<span class="hljs-string">"**"</span>]</span>]
+<span class="hljs-symbol">Filters</span>
+  --modules                                             [string] [default: <span class="hljs-string">".*"</span>]
+  --ignore                                             [array] [default: [<span class="hljs-string">"**"</span>]]
 
-<span class="hljs-selector-tag">Output</span>
-  <span class="hljs-selector-tag">--outputdir</span>                               <span class="hljs-selector-attr">[string]</span> <span class="hljs-selector-attr">[required]</span> <span class="hljs-selector-attr">[default: <span class="hljs-string">"out"</span>]</span>
-  <span class="hljs-selector-tag">--outputfile</span>                       <span class="hljs-selector-attr">[string]</span> <span class="hljs-selector-attr">[required]</span> <span class="hljs-selector-attr">[default: <span class="hljs-string">"index.html"</span>]</span>
+<span class="hljs-symbol">Output</span>
+  --outputdir                               [string] [required] [default: <span class="hljs-string">"out"</span>]
+  --outputfile                       [string] [required] [default: <span class="hljs-string">"index.html"</span>]
 
-<span class="hljs-selector-tag">Project</span>
-  <span class="hljs-selector-tag">--mpk</span>                                                                 <span class="hljs-selector-attr">[string]</span>
-  <span class="hljs-selector-tag">--projectid</span>                                                           <span class="hljs-selector-attr">[string]</span>
-  <span class="hljs-selector-tag">--revision</span>                                                            <span class="hljs-selector-attr">[number]</span>
-  <span class="hljs-selector-tag">--branch</span>                                                              <span class="hljs-selector-attr">[string]</span>
-  <span class="hljs-selector-tag">--workingcopyid</span>                                                       <span class="hljs-selector-attr">[string]</span>
+<span class="hljs-symbol">Project</span>
+  --mpk                                                                 [string]
+  --projectid                                                           [string]
+  --revision                                                            [number]
+  --branch                                                              [string]
+  --workingcopyid                                                       [string]
 
-<span class="hljs-selector-tag">Templates</span>
-  <span class="hljs-selector-tag">--templatedir</span>                                                         <span class="hljs-selector-attr">[string]</span>
-  <span class="hljs-selector-tag">--templateext</span>                                                         <span class="hljs-selector-attr">[string]</span>
-  <span class="hljs-selector-tag">--maintemplate</span>                                                        <span class="hljs-selector-attr">[string]</span>
+<span class="hljs-symbol">Templates</span>
+  --templatedir                                                         [string]
+  --templateext                                                         [string]
+  --maintemplate                                                        [string]
 
-<span class="hljs-selector-tag">Options</span>:
-  <span class="hljs-selector-tag">--help</span>     <span class="hljs-selector-tag">Show</span> <span class="hljs-selector-tag">help</span>                                                 <span class="hljs-selector-attr">[boolean]</span>
-  <span class="hljs-selector-tag">--version</span>  <span class="hljs-selector-tag">Show</span> <span class="hljs-selector-tag">version</span> <span class="hljs-selector-tag">number</span>                                       <span class="hljs-selector-attr">[boolean]</span>
-  <span class="hljs-selector-tag">--config</span>   <span class="hljs-selector-tag">Path</span> <span class="hljs-selector-tag">to</span> <span class="hljs-selector-tag">JSON</span> <span class="hljs-selector-tag">config</span> <span class="hljs-selector-tag">file</span></code></pre>
+<span class="hljs-symbol">Options</span>:
+  --help     <span class="hljs-symbol">Show</span> help                                                 [boolean]
+  --version  <span class="hljs-symbol">Show</span> version number                                       [boolean]
+  --config   <span class="hljs-symbol">Path</span> to <span class="hljs-symbol">JSON</span> config file</code></pre>
 				<a href="#copy-templates" id="copy-templates" style="color: inherit; text-decoration: none;">
 					<h5>Copy templates</h5>
 				</a>
-				<pre><code>cli.js copy-templates &lt;target&gt;
+				<pre><code>mxdocgen copy-templates &lt;target&gt;
 
 Copy the<span class="hljs-built_in"> default </span>templates <span class="hljs-keyword">to</span> another location <span class="hljs-keyword">for</span> modification
 

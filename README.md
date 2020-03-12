@@ -62,12 +62,12 @@ npm run start
 ##### Without a command
 
 ```
-cli.js <command>
+mxdocgen <command>
 
 Commands:
-  cli.js copy-templates <target>  Copy the default templates to another location
+  mxdocgen copy-templates <target>  Copy the default templates to another location
                                   for modification
-  cli.js generate                 Generate documentation
+  mxdocgen generate                 Generate documentation
 
 Options:
   --help     Show help                                                 [boolean]
@@ -78,7 +78,7 @@ Options:
 ##### Generate
 
 ```
-cli.js generate
+mxdocgen generate
 
 Generate documentation
 
@@ -115,7 +115,7 @@ Options:
 ##### Copy templates
 
 ```
-cli.js copy-templates <target>
+mxdocgen copy-templates <target>
 
 Copy the default templates to another location for modification
 

@@ -10,6 +10,10 @@ function renderAsMarkdownCode(value) {
     return `\`\`\`\n${value}\`\`\`\n`;
 }
 
+function replaceCommand(text, originalCommand, targetCommand) {
+    return text.replace(new RegExp(originalCommand, "g"), targetCommand);
+}
+
 async function run() {
     shell.cd(path.resolve(__dirname, ".."));
 
@@ -19,11 +23,11 @@ async function run() {
 
     shell.mkdir("-p", path.join(__dirname, "generated/readme"));
 
-    shell.ShellString(renderAsMarkdownCode(noCommandHelpOutput))
+    shell.ShellString(renderAsMarkdownCode(replaceCommand(noCommandHelpOutput, "cli.js", "mxdocgen")))
         .to(path.join(__dirname, "generated/readme/nocommand.md"));
-    shell.ShellString(renderAsMarkdownCode(generateCommandHelpOutput))
+    shell.ShellString(renderAsMarkdownCode(replaceCommand(generateCommandHelpOutput, "cli.js", "mxdocgen")))
         .to(path.join(__dirname, "generated/readme/generatecommand.md"));
-    shell.ShellString(renderAsMarkdownCode(copyTemplatesCommandHelpOutput))
+    shell.ShellString(renderAsMarkdownCode(replaceCommand(copyTemplatesCommandHelpOutput, "cli.js", "mxdocgen")))
         .to(path.join(__dirname, "generated/readme/copytemplatescommand.md"));
 
     shell.rm("README.md");
