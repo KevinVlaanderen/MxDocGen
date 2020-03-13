@@ -1,0 +1,7 @@
+<% if (projectPrerequisites && projectPrerequisites.length) { -%>
+## Prerequisites
+
+<% projectPrerequisites.map(({ name, value }) => { -%>
+    - <%= name %> <%= value %>
+<% }) -%>
+<% } -%>

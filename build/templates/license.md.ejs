@@ -1,0 +1,9 @@
+<% if (licenseName && licenseUrl) { -%>
+## 📝 License
+
+<% if (authorName && authorGithubUsername) { -%>
+Copyright © <%= currentYear %> [<%= authorName %>](https://github.com/<%= authorGithubUsername %>).<br/>
+<% } -%>
+
+This project is [<%= licenseName %>](<%= licenseUrl %>) licensed.
+<% } -%>

@@ -150,7 +150,8 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-    Copyright © 2020 [Kevin Vlaanderen](https://github.com/KevinVlaanderen).<br/>
+Copyright © 2020 [Kevin Vlaanderen](https://github.com/KevinVlaanderen).<br/>
+
 This project is [ISC](https://github.com/KevinVlaanderen/MxDocGen/blob/master/LICENSE) licensed.
 
 ***

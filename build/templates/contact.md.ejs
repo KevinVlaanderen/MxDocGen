@@ -1,0 +1,23 @@
+<% if (authorName || authorTwitterUsername || authorGithubUsername) { -%>
+## Author
+
+<% if (authorName) { %>
+👤 **<%= authorName %>**
+<% } %>
+
+<% if (authorWebsite) { -%>
+* Website: <%= authorWebsite %>
+<% } -%>
+
+<% if (authorTwitterUsername) { -%>
+* Twitter: [@<%= authorTwitterUsername %>](https://twitter.com/<%= authorTwitterUsername %>)
+<% } -%>
+
+<% if (authorGithubUsername) { -%>
+* Github: [@<%= authorGithubUsername %>](https://github.com/<%= authorGithubUsername %>)
+<% } -%>
+
+<% if (authorLinkedInUsername) { -%>
+* LinkedIn: [@<%= authorLinkedInUsername %>](https://linkedin.com/in/<%= authorLinkedInUsername %>)
+<% } -%>
+<% } -%>
