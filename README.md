@@ -31,6 +31,7 @@ The tool can be used as a standalone (node-based) CLI or as a library.
 
 ### 🏠 [Homepage](https://github.com/KevinVlaanderen/MxDocGen#readme)
 
+### ✨ [Demo](https://github.com/KevinVlaanderen/MxDocGen/tree/master/demo)
 
 
 ## Install
@@ -91,7 +92,7 @@ Filters:
   --ignore                                             [array] [default: ["**"]]
 
 Output:
-  --outputdir                               [string] [required] [default: "out"]
+  --outputdir                            [string] [required] [default: "output"]
   --outputfile                       [string] [required] [default: "index.html"]
 
 Project:

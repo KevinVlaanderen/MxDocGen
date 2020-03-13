@@ -4,6 +4,6 @@ export interface OutputConfig {
 }
 
 export const defaultOutputConfig: OutputConfig = {
-	directory: "out",
+	directory: "output",
 	filename: "index.html"
 };
