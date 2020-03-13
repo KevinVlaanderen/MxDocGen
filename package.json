@@ -21,10 +21,11 @@
   "bin": "dist/cli/cli.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "npm run clean-generated && tsc",
     "clean": "npm run clean-generated && npm run clean-output",
     "docs": "npm run readme && npm run typedoc",
-    "prepare": "npm run clean-generated && tsc",
-    "start": "tsc && node dist/cli/cli.js",
+    "prepare": "npm run build",
+    "start": "npm run build && node dist/cli/cli.js",
     "clean-generated": "rimraf dist/",
     "clean-output": "rimraf out/",
     "readme": "node build/readme.js",

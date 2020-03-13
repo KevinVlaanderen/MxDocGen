@@ -1,9 +1,9 @@
 import { MendixSdkClient } from "mendixplatformsdk";
-import { generate } from "mxdocgen/dist/documentation/generate";
-import { defaultOutputConfig } from "mxdocgen/dist/documentation/output";
-import { defaultFilterConfig } from "mxdocgen/dist/documentation/filters";
-import { defaultTemplateConfig } from "mxdocgen/dist/documentation/templates";
-import { DefaultProcessor } from "mxdocgen/dist/documentation/defaultprocessor";
+import { generate } from "../dist/documentation/generate";
+import { defaultOutputConfig } from "../dist/documentation/output";
+import { defaultFilterConfig } from "../dist/documentation/filters";
+import { defaultTemplateConfig } from "../dist/documentation/templates";
+import { DefaultProcessor } from "../dist/documentation/defaultprocessor";
 
 async function main() {
 	const username = process.argv[2];

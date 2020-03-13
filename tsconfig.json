@@ -10,8 +10,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "sourceMap": true,
-    "strict": true,
-    "target": "es2019"
+    "strict": true
   },
   "include": [
     "src/**/*"

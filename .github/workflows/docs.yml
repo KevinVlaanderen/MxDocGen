@@ -27,13 +27,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: |
+      - run: npm ci
+
+      - name: Generate demo output
+        run: |
+          npm run build
           cd demo
           npm ci
-
-      - name: Generate README
-        run: |
-          cd demo
           npm run start ${{ secrets.MXUSERNAME }} ${{ secrets.MXAPIKEY }}
 
   commit:

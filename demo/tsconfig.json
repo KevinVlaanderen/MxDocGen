@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "ES2019"
+    ],
+    "module": "commonjs",
+    "rootDir": "."
+  },
+  "include": [
+    "index.ts"
+  ]
+}
