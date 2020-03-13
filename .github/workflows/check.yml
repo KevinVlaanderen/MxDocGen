@@ -2,7 +2,7 @@ name: Checks
 
 on:
   push:
-    branches: "**"
+    branches: "master"
   pull_request:
   release:
     types: [created]
