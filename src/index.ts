@@ -17,6 +17,8 @@ import * as documentationgeneratets from "./documentation/generate";
 import * as documentationoutputts from "./documentation/output";
 import * as documentationprocessorts from "./documentation/processor";
 import * as documentationtemplatests from "./documentation/templates";
+import * as sdkassociationsts from "./sdk/associations";
+import * as sdkattributetypests from "./sdk/attributetypes";
 import * as sdkdatatypests from "./sdk/datatypes";
 import * as sdkdocumenttypests from "./sdk/documenttypes";
 import * as sdkprojectsts from "./sdk/projects";
@@ -44,6 +46,8 @@ export const documentation = {
 	templates: documentationtemplatests
 };
 export const sdk = {
+	associations: sdkassociationsts,
+	attributetypes: sdkattributetypests,
 	datatypes: sdkdatatypests,
 	documenttypes: sdkdocumenttypests,
 	projects: sdkprojectsts
