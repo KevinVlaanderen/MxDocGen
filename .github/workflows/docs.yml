@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  readme:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,33 +14,17 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
-
       - name: Generate README
         run: npm run readme
       - name: Generate Typedoc
         run: npm run typedoc
-
-  demo:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm ci
-
+      - name: Build library
+        run: npm run build
       - name: Generate demo output
         run: |
-          npm run build
           cd demo
           npm ci
           npm run start ${{ secrets.MXUSERNAME }} ${{ secrets.MXAPIKEY }}
-
-  commit:
-    runs-on: ubuntu-latest
-    needs: [readme, demo]
-    steps:
-      - uses: actions/checkout@v2
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
