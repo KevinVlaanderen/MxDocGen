@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>DefaultModuleTemplateData | mxdocgen</title>
+	<title>DefaultEntityTemplateData | mxdocgen</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules/_documentation_defaulttemplatedata_.html">&quot;documentation/defaulttemplatedata&quot;</a>
 				</li>
 				<li>
-					<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html">DefaultModuleTemplateData</a>
+					<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html">DefaultEntityTemplateData</a>
 				</li>
 			</ul>
-			<h1>Interface DefaultModuleTemplateData</h1>
+			<h1>Interface DefaultEntityTemplateData</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 						<a href="_documentation_templates_.templatedata.html" class="tsd-signature-type">TemplateData</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">DefaultModuleTemplateData</span>
+								<span class="target">DefaultEntityTemplateData</span>
 							</li>
 						</ul>
 					</li>
@@ -89,11 +89,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#domainmodel" class="tsd-kind-icon">Domain<wbr>Model</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#hasmicroflows" class="tsd-kind-icon">Has<wbr>Microflows</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#id" class="tsd-kind-icon">ID</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#microflows" class="tsd-kind-icon">Microflows</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#name" class="tsd-kind-icon">Name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#associations" class="tsd-kind-icon">Associations</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#attributes" class="tsd-kind-icon">Attributes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#documentation" class="tsd-kind-icon">Documentation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#generalization" class="tsd-kind-icon">Generalization</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#hasassociations" class="tsd-kind-icon">Has<wbr>Associations</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#hasattributes" class="tsd-kind-icon">Has<wbr>Attributes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#id" class="tsd-kind-icon">ID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#name" class="tsd-kind-icon">Name</a></li>
 							</ul>
 						</section>
 					</div>
@@ -102,22 +105,62 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="domainmodel" class="tsd-anchor"></a>
-					<h3>Domain<wbr>Model</h3>
-					<div class="tsd-signature tsd-kind-icon">Domain<wbr>Model<span class="tsd-signature-symbol">:</span> <a href="_documentation_defaulttemplatedata_.defaultdomainmodeltemplatedata.html" class="tsd-signature-type">DefaultDomainModelTemplateData</a></div>
+					<a name="associations" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Associations</h3>
+					<div class="tsd-signature tsd-kind-icon">Associations<span class="tsd-signature-symbol">:</span> <a href="_documentation_defaulttemplatedata_.defaultassociationtemplatedata.html" class="tsd-signature-type">DefaultAssociationTemplateData</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L11">documentation/defaulttemplatedata.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L35">documentation/defaulttemplatedata.ts:35</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="hasmicroflows" class="tsd-anchor"></a>
-					<h3>Has<wbr>Microflows</h3>
-					<div class="tsd-signature tsd-kind-icon">Has<wbr>Microflows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="attributes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Attributes</h3>
+					<div class="tsd-signature tsd-kind-icon">Attributes<span class="tsd-signature-symbol">:</span> <a href="_documentation_defaulttemplatedata_.defaultattributetemplatedata.html" class="tsd-signature-type">DefaultAttributeTemplateData</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L12">documentation/defaulttemplatedata.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L33">documentation/defaulttemplatedata.ts:33</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="documentation" class="tsd-anchor"></a>
+					<h3>Documentation</h3>
+					<div class="tsd-signature tsd-kind-icon">Documentation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L30">documentation/defaulttemplatedata.ts:30</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="generalization" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Generalization</h3>
+					<div class="tsd-signature tsd-kind-icon">Generalization<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L31">documentation/defaulttemplatedata.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hasassociations" class="tsd-anchor"></a>
+					<h3>Has<wbr>Associations</h3>
+					<div class="tsd-signature tsd-kind-icon">Has<wbr>Associations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L34">documentation/defaulttemplatedata.ts:34</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hasattributes" class="tsd-anchor"></a>
+					<h3>Has<wbr>Attributes</h3>
+					<div class="tsd-signature tsd-kind-icon">Has<wbr>Attributes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L32">documentation/defaulttemplatedata.ts:32</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -127,17 +170,7 @@
 					<div class="tsd-signature tsd-kind-icon">ID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L9">documentation/defaulttemplatedata.ts:9</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="microflows" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> Microflows</h3>
-					<div class="tsd-signature tsd-kind-icon">Microflows<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>ID<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>Microflows<span class="tsd-signature-symbol">: </span><a href="_documentation_defaulttemplatedata_.defaultmicroflowtemplatedata.html" class="tsd-signature-type">DefaultMicroflowTemplateData</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>TypeName<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L13">documentation/defaulttemplatedata.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L28">documentation/defaulttemplatedata.ts:28</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +180,7 @@
 					<div class="tsd-signature tsd-kind-icon">Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L10">documentation/defaulttemplatedata.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/KevinVlaanderen/MxDocGen/blob/a4326f9/src/documentation/defaulttemplatedata.ts#L29">documentation/defaulttemplatedata.ts:29</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -208,39 +241,48 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_documentation_defaulttemplatedata_.defaultdomainmodeltemplatedata.html" class="tsd-kind-icon">Default<wbr>Domain<wbr>Model<wbr>Template<wbr>Data</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html" class="tsd-kind-icon">Default<wbr>Entity<wbr>Template<wbr>Data</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#associations" class="tsd-kind-icon">Associations</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#attributes" class="tsd-kind-icon">Attributes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#documentation" class="tsd-kind-icon">Documentation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#generalization" class="tsd-kind-icon">Generalization</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#hasassociations" class="tsd-kind-icon">Has<wbr>Associations</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#hasattributes" class="tsd-kind-icon">Has<wbr>Attributes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#id" class="tsd-kind-icon">ID</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_documentation_defaulttemplatedata_.defaultentitytemplatedata.html#name" class="tsd-kind-icon">Name</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_documentation_defaulttemplatedata_.defaultmicroflowparameterstemplatedata.html" class="tsd-kind-icon">Default<wbr>Microflow<wbr>Parameters<wbr>Template<wbr>Data</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_documentation_defaulttemplatedata_.defaultmicroflowtemplatedata.html" class="tsd-kind-icon">Default<wbr>Microflow<wbr>Template<wbr>Data</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html" class="tsd-kind-icon">Default<wbr>Module<wbr>Template<wbr>Data</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#domainmodel" class="tsd-kind-icon">Domain<wbr>Model</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#hasmicroflows" class="tsd-kind-icon">Has<wbr>Microflows</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#id" class="tsd-kind-icon">ID</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#microflows" class="tsd-kind-icon">Microflows</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_documentation_defaulttemplatedata_.defaultmoduletemplatedata.html#name" class="tsd-kind-icon">Name</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_documentation_defaulttemplatedata_.defaulttemplatedata.html" class="tsd-kind-icon">Default<wbr>Template<wbr>Data</a>
 					</li>
