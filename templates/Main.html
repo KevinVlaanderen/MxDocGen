@@ -26,6 +26,9 @@
                                 <a href='#{{ID}}'>{{Name}}</a>
                                 <ul class="nav nav-list">
                                     <li><a href='#{{DomainModel.ID}}'>Domain model</a></li>
+                                    {{#HasJavaActions}}
+                                    <li><a href='#{{JavaActions.ID}}'>Java Actions</a></li>
+                                    {{/HasJavaActions}}
                                     {{#HasMicroflows}}
                                     <li><a href='#{{Microflows.ID}}'>Microflows</a></li>
                                     {{/HasMicroflows}}
@@ -44,17 +47,23 @@
 
                     {{#Modules}}
                     <h2 id='{{ID}}'>Module '{{Name}}'</h2>
-            
+
                     {{#DomainModel}}
                     {{> DomainModel}}
                     {{/DomainModel}}
-            
+
+                    {{#HasJavaActions}}
+                    {{#JavaActions}}
+                    {{> JavaActions}}
+                    {{/JavaActions}}
+                    {{/HasJavaActions}}
+
                     {{#HasMicroflows}}
                     {{#Microflows}}
                     {{> Microflows}}
                     {{/Microflows}}
                     {{/HasMicroflows}}
-            
+
                     {{#HasRules}}
                     {{#Rules}}
                     {{> Microflows}}

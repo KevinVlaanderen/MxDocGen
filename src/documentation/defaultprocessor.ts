@@ -1,9 +1,10 @@
-import { domainmodels, IModel, microflows, projects } from "mendixmodelsdk";
+import { domainmodels, IModel, javaactions, microflows, projects } from "mendixmodelsdk";
 import uuid from "uuid";
 import { humanReadableDataType } from "../sdk/datatypes";
 import {
 	documentLowerTypeName,
 	documentTypeName,
+	isJavaAction,
 	isMicroflow,
 	isRule,
 	typeName
@@ -14,11 +15,12 @@ import {
 	DefaultAttributeTemplateData,
 	DefaultDomainModelTemplateData,
 	DefaultEntityTemplateData,
+	DefaultJavaActionTemplateData,
 	DefaultMicroflowTemplateData,
 	DefaultTemplateData
 } from "./defaulttemplatedata";
-import { humanReadableAttributeType } from "../sdk/attributetypes";
-import { multiplicity } from "../sdk/associations";
+import { humanReadableAttributeType } from "../sdk/domainmodels/attributetypes";
+import { multiplicity } from "../sdk/domainmodels/associations";
 import IModule = projects.IModule;
 import MicroflowParameterObject = microflows.MicroflowParameterObject;
 import IFolderBase = projects.IFolderBase;
@@ -33,6 +35,10 @@ import Generalization = domainmodels.Generalization;
 import AssociationOwner = domainmodels.AssociationOwner;
 import Rule = microflows.Rule;
 import IMicroflowBase = microflows.IMicroflowBase;
+import JavaAction = javaactions.JavaAction;
+import IJavaAction = javaactions.IJavaAction;
+import { humanReadableType } from "../sdk/codeactions/types";
+import { humanReadableParameterType } from "../sdk/codeactions/parametertypes";
 
 export class DefaultProcessor implements Processor<DefaultTemplateData> {
 	constructor(
@@ -58,6 +64,17 @@ export class DefaultProcessor implements Processor<DefaultTemplateData> {
 			ID: uuid(),
 			Name: module.name,
 			DomainModel: await this.processDomainModel(module.domainModel),
+			HasJavaActions: documents.find(isJavaAction) !== undefined,
+			JavaActions: {
+				ID: uuid(),
+				TypeName: typeName(JavaAction),
+				JavaActions: await Promise.all(
+					documents
+						.filter(isJavaAction)
+						.sort((a, b) => a.name.localeCompare(b.name))
+						.map(javaAction => this.processJavaAction(javaAction))
+				)
+			},
 			HasMicroflows: documents.find(isMicroflow) !== undefined,
 			Microflows: {
 				ID: uuid(),
@@ -163,6 +180,33 @@ export class DefaultProcessor implements Processor<DefaultTemplateData> {
 				loadedAssociation.parent === entity
 					? loadedAssociation.child.qualifiedName!
 					: loadedAssociation.parent.qualifiedName!
+		};
+	}
+
+	protected async processJavaAction(
+		javaAction: IJavaAction
+	): Promise<DefaultJavaActionTemplateData> {
+		const loadedJavaAction = await javaAction.load();
+
+		const javaActionParameters = loadedJavaAction.actionParameters
+			.slice()
+			.sort((a, b) => a.name.localeCompare(b.name));
+
+		return {
+			ID: uuid(),
+			Name: loadedJavaAction.name,
+			Documentation: loadedJavaAction.documentation,
+			TypeName: documentTypeName(loadedJavaAction),
+			LowerTypeName: documentLowerTypeName(loadedJavaAction),
+			HasParameters: javaActionParameters.length > 0,
+			Parameters: javaActionParameters.map(javaActionParameter => ({
+				Name: javaActionParameter.name,
+				Type: humanReadableParameterType(javaActionParameter.actionParameterType),
+				Category: javaActionParameter.category,
+				Description: javaActionParameter.description
+			})),
+			ReturnType: humanReadableType(loadedJavaAction.actionReturnType),
+			"Return type": humanReadableType(loadedJavaAction.actionReturnType)
 		};
 	}
 

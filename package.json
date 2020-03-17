@@ -30,7 +30,7 @@
     "clean-output": "rimraf out/",
     "readme": "node build/readme.js",
     "typedoc": "typedoc && touch docs/.nojekyll",
-    "barrels": "barrelsby --delete -d src -e __tests__ -l top -s filesystem",
+    "barrels": "barrelsby --delete -d src -e __tests__ -l top -s filesystem && npm run prettier",
     "prettier": "pretty-quick --verbose --write **/*.*",
     "prettier-check": "pretty-quick --verbose --check **/*.*"
   },

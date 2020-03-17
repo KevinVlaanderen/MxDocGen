@@ -17,10 +17,12 @@ import * as documentationgeneratets from "./documentation/generate";
 import * as documentationoutputts from "./documentation/output";
 import * as documentationprocessorts from "./documentation/processor";
 import * as documentationtemplatests from "./documentation/templates";
-import * as sdkassociationsts from "./sdk/associations";
-import * as sdkattributetypests from "./sdk/attributetypes";
+import * as sdkcodeactionsparametertypests from "./sdk/codeactions/parametertypes";
+import * as sdkcodeactionstypests from "./sdk/codeactions/types";
 import * as sdkdatatypests from "./sdk/datatypes";
 import * as sdkdocumenttypests from "./sdk/documenttypes";
+import * as sdkdomainmodelsassociationsts from "./sdk/domainmodels/associations";
+import * as sdkdomainmodelsattributetypests from "./sdk/domainmodels/attributetypes";
 import * as sdkprojectsts from "./sdk/projects";
 export const cli = {
 	cli: cliclits,
@@ -46,9 +48,15 @@ export const documentation = {
 	templates: documentationtemplatests
 };
 export const sdk = {
-	associations: sdkassociationsts,
-	attributetypes: sdkattributetypests,
+	codeactions: {
+		parametertypes: sdkcodeactionsparametertypests,
+		types: sdkcodeactionstypests
+	},
 	datatypes: sdkdatatypests,
 	documenttypes: sdkdocumenttypests,
+	domainmodels: {
+		associations: sdkdomainmodelsassociationsts,
+		attributetypes: sdkdomainmodelsattributetypests
+	},
 	projects: sdkprojectsts
 };

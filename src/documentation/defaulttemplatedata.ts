@@ -9,6 +9,12 @@ export interface DefaultModuleTemplateData extends TemplateData {
 	ID: string;
 	Name: string;
 	DomainModel: DefaultDomainModelTemplateData;
+	HasJavaActions: boolean;
+	JavaActions?: {
+		ID: string;
+		TypeName: string;
+		JavaActions: DefaultJavaActionTemplateData[];
+	};
 	HasMicroflows: boolean;
 	Microflows?: {
 		ID: string;
@@ -55,6 +61,25 @@ export interface DefaultAssociationTemplateData extends TemplateData {
 	Multiplicity: string;
 }
 
+export interface DefaultJavaActionTemplateData extends TemplateData {
+	ID: string;
+	Name: string;
+	Documentation: string;
+	TypeName: string;
+	LowerTypeName: string;
+	HasParameters: boolean;
+	Parameters?: DefaultJavaActionParameterTemplateData[];
+	ReturnType: string;
+	"Return type": string;
+}
+
+export interface DefaultJavaActionParameterTemplateData extends TemplateData {
+	Name: string;
+	Type: string;
+	Category: string;
+	Description: string;
+}
+
 export interface DefaultMicroflowTemplateData extends TemplateData {
 	ID: string;
 	Name: string;
@@ -62,12 +87,12 @@ export interface DefaultMicroflowTemplateData extends TemplateData {
 	TypeName: string;
 	LowerTypeName: string;
 	HasParameters: boolean;
-	Parameters?: DefaultMicroflowParametersTemplateData[];
+	Parameters?: DefaultMicroflowParameterTemplateData[];
 	ReturnType: string;
 	"Return type": string;
 }
 
-export interface DefaultMicroflowParametersTemplateData extends TemplateData {
+export interface DefaultMicroflowParameterTemplateData extends TemplateData {
 	Name: string;
 	Type: string;
 	Documentation: string;
