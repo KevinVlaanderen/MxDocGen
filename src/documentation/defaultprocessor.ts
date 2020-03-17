@@ -5,6 +5,7 @@ import {
 	documentLowerTypeName,
 	documentTypeName,
 	isMicroflow,
+	isRule,
 	typeName
 } from "../sdk/documenttypes";
 import { Processor } from "./processor";
@@ -21,7 +22,6 @@ import { multiplicity } from "../sdk/associations";
 import IModule = projects.IModule;
 import MicroflowParameterObject = microflows.MicroflowParameterObject;
 import IFolderBase = projects.IFolderBase;
-import IMicroflow = microflows.IMicroflow;
 import Microflow = microflows.Microflow;
 import IDocument = projects.IDocument;
 import IDomainModel = domainmodels.IDomainModel;
@@ -31,6 +31,8 @@ import IAssociation = domainmodels.IAssociation;
 import StoredValue = domainmodels.StoredValue;
 import Generalization = domainmodels.Generalization;
 import AssociationOwner = domainmodels.AssociationOwner;
+import Rule = microflows.Rule;
+import IMicroflowBase = microflows.IMicroflowBase;
 
 export class DefaultProcessor implements Processor<DefaultTemplateData> {
 	constructor(
@@ -65,6 +67,17 @@ export class DefaultProcessor implements Processor<DefaultTemplateData> {
 						.filter(isMicroflow)
 						.sort((a, b) => a.name.localeCompare(b.name))
 						.map(microflow => this.processMicroflow(microflow))
+				)
+			},
+			HasRules: documents.find(isRule) !== undefined,
+			Rules: {
+				ID: uuid(),
+				TypeName: typeName(Rule),
+				Microflows: await Promise.all(
+					documents
+						.filter(isRule)
+						.sort((a, b) => a.name.localeCompare(b.name))
+						.map(rule => this.processMicroflow(rule))
 				)
 			}
 		};
@@ -153,7 +166,9 @@ export class DefaultProcessor implements Processor<DefaultTemplateData> {
 		};
 	}
 
-	protected async processMicroflow(microflow: IMicroflow): Promise<DefaultMicroflowTemplateData> {
+	protected async processMicroflow(
+		microflow: IMicroflowBase
+	): Promise<DefaultMicroflowTemplateData> {
 		const loadedMicroflow = await microflow.load();
 
 		const microflowParameterObjects = loadedMicroflow.objectCollection.objects

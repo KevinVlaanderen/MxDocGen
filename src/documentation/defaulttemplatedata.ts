@@ -15,6 +15,12 @@ export interface DefaultModuleTemplateData extends TemplateData {
 		TypeName: string;
 		Microflows: DefaultMicroflowTemplateData[];
 	};
+	HasRules: boolean;
+	Rules?: {
+		ID: string;
+		TypeName: string;
+		Microflows: DefaultMicroflowTemplateData[];
+	};
 }
 
 export interface DefaultDomainModelTemplateData extends TemplateData {
